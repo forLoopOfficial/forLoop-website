@@ -1,0 +1,129 @@
+.text-editor {
+    min-width: 525px;
+    @include media(max-width 567px) {
+        transform: scale(0.8);
+        margin-left: -52px;
+        margin-bottom: -35px;
+    }
+}
+
+.text-editor__header {
+    height: 30px;
+    padding: 5px 15px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #1a1a1a;
+}
+
+.text-editor__header__item {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.text-editor__header__item--close {
+    background-color: #f14443;
+}
+
+.text-editor__header__item--minimize {
+    background-color: #fab312;
+}
+
+.text-editor__header__item--full-screen {
+    background-color: #37c125;
+}
+
+.text-editor__tile {
+    padding-top: 7px;
+    height: 35px;
+    padding-left: 22px;
+    background-color: #2f3a4d;
+}
+
+.text-editor__tile__item {
+    position: relative;
+    display: inline-block;
+    width: 140px;
+    height: 28px;
+    padding: 5px 10px;
+    color: #2f4358;
+    font-size: 12px;
+    margin-right: 15px;
+    letter-spacing: 0.4px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #c2c2c2;
+    &::before {
+        position: absolute;
+        content: ' ';
+        left: -13px;
+        bottom: 0;
+        border-left: 15px solid transparent;
+        border-bottom: 24px solid #c2c2c2;
+    }
+    &::after {
+        position: absolute;
+        content: ' ';
+        right: -13px;
+        bottom: 0;
+        border-right: 15px solid transparent;
+        border-bottom: 24px solid #c2c2c2;
+    }
+    &.active {
+        background-color: #1a1a1a;
+        color: #fff;
+        &::before {    
+            border-bottom: 24px solid #1a1a1a;
+        }
+        &::after {
+            border-bottom: 24px solid #1a1a1a;
+            z-index: 2;
+        }
+    }
+}
+
+.text-editor__body {
+    height: 276px;
+    border-radius: 5px;
+    background-color: #1a1a1a;
+    padding: 15px;
+    font-size: 12px;
+}
+
+.code {
+    line-height: 1.45;
+    color: #ffffff;
+}
+
+.line-number {
+    width: 16px;
+    margin-right: 16px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    color: #a4a4a4;
+    font-family: 'SourceCodePro-Medium', 'MS Gothic', monospace;
+}
+
+.tag {
+    color: #f63ba8;
+}
+
+.block__indent-1 {
+    margin-right: 50px;
+}
+
+.block__indent-2 {
+    margin-right: 80px;
+}
+
+.block__indent-3 {
+    margin-right: 60px;
+}
+
+.context {
+    color: #39ee00;
+}

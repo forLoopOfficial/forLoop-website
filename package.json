@@ -1,0 +1,18 @@
+{
+  "name": "forLoop",
+  "version": "1.0.0",
+  "description": "Nigerian Programmers Together",
+  "main": "index.js",
+  "author": "Nosa Obaseki",
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^2.1.1",
+    "gulp-uglify": "^2.0.0"
+  }
+}

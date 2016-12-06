@@ -1,0 +1,49 @@
+body {
+    font-size: $font-base;
+    font-family: $font-stack;
+    font-weight: $font-normal;
+    color: $text-color;
+    padding-top: 100px;
+    padding-bottom: 200px;
+    background-color: $accent-color;
+    @include media(560px) {
+        padding-bottom: 300px;
+    }
+}
+
+html, html a {
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    height: 32px;
+    width: 32px;
+    display: inline-block; 
+    fill: currentColor;
+
+    &.icon-md {
+        height: 25px;
+        width: 25px;
+    }
+
+    &.icon-sm {
+        height: 20px;
+        width: 20px;
+    }
+
+    &.icon-xs {
+        height: 15px;
+        width: 15px;
+    }
+
+    &.icon-ss {
+        height: 18px;
+        width: 18px;
+    }
+
+    &.icon-lg {
+        height: 45px;
+        width: 45px;
+    }
+}

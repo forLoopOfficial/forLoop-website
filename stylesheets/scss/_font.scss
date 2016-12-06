@@ -1,0 +1,38 @@
+// Font Weights
+$font-light: 300;
+$font-normal: 400;
+$font-medium: 500;
+$font-semi-bold: 600;
+$font-bold: 700;
+$font-extra-bold: 800;
+
+// Default Font Size
+$font-base: 14px;
+
+
+// Font Stack
+$font-stack: 'FaktSoftPro', sans-serif;
+
+@font-face {
+    font-family: 'FaktSoftPro';
+    font-style: normal;
+    font-weight: 300;
+    src: url("../fonts/FaktSoftPro-Blond.woff") format("woff"),
+        url('../fonts/FaktSoftPro-Blond.ttf') format('TrueType');
+}
+
+@font-face {
+    font-family: 'FaktSoftPro';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/FaktSoftPro-Normal.woff") format("woff"),
+        url("../fonts/FaktSoftPro-Normal.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'FaktSoftPro';
+    font-style: normal;
+    font-weight: 500;
+    src: url("../fonts/FaktSoftPro-Medium.woff") format("woff"),
+        url('../fonts/FaktSoftPro-Medium.ttf') format('TrueType');
+}
