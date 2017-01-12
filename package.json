@@ -1,4 +1,10 @@
 {
+  "name": "forLoop",
+  "version": "1.0.0",
+  "description": "Nigerian Programmers Together",
+  "main": "index.js",
+  "author": "Nosa Obaseki",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "prod": "gulp --production",
@@ -14,5 +20,8 @@
     "lodash": "^4.16.2",
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1"
   }
 }

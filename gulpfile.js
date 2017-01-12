@@ -1,3 +1,4 @@
+
 const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
@@ -15,5 +16,10 @@ require('laravel-elixir-vue-2');
 
 elixir(mix => {
     mix.sass('app.scss')
-       .webpack('app.js');
+       .webpack('app.js')
+       .scripts([
+           'bootstrap-tab.js',
+           'ie10-viewport-bug-workaround.js',
+           'custom.js'
+         ]);
 });

@@ -5,3 +5,5 @@
 Homestead.json
 Homestead.yaml
 .env
+docker-run.sh
+Dockerfile
