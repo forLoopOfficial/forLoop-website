@@ -22,4 +22,24 @@ elixir(mix => {
            'ie10-viewport-bug-workaround.js',
            'custom.js'
          ]);
+
+    //admin static resources
+    mix.sass('custom.scss', 'public/css/admin-app.css')
+        .sass('daterangepicker.scss')
+        .styles([
+          "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+          "./node_modules/font-awesome/css/font-awesome.min.css",
+          "./node_modules/nprogress/nprogress.css"
+        ], 'public/css/admin-all.css')
+        .copy('node_modules/font-awesome/fonts', 'public/fonts')
+        .scripts([
+          "smartresize.js",
+          "admin-custom.js"
+        ], 'public/js/admin-app.js')
+        .scripts([
+          "./node_modules/jquery/dist/jquery.js",
+          "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+          "./node_modules/fastclick/lib/fastclick.js",
+          "./node_modules/nprogress/nprogress.js"
+        ], 'public/js/admin-all.js');
 });

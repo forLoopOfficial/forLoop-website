@@ -22,6 +22,19 @@
     "vue-resource": "^1.0.3"
   },
   "dependencies": {
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "animate.css": "^3.5.1",
+    "autosize": "^3.0.15",
+    "bootstrap": "^3.3.7",
+    "bootstrap-progressbar": "^0.9.0",
+    "cropper": "^2.3.0",
+    "datejs": "^1.0.0-rc3",
+    "font-awesome": "^4.6.1",
+    "fastclick": "^1.0.6",
+    "nprogress": "^0.2.0",
+    "parsleyjs": "^2.3.10",
+    "normalize-css": "^2.0.0",
+    "pnotify": "^3.0.0",
+    "select2": "^4.0.2"
   }
 }
