@@ -16,7 +16,6 @@ require('laravel-elixir-vue-2');
 
 elixir(mix => {
     mix.sass('app.scss')
-       .webpack('app.js')
        .scripts([
            'bootstrap-tab.js',
            'ie10-viewport-bug-workaround.js',
@@ -26,6 +25,7 @@ elixir(mix => {
     //admin static resources
     mix.sass('custom.scss', 'public/css/admin-app.css')
         .sass('daterangepicker.scss')
+        .webpack('admin-main.js')
         .styles([
           "./node_modules/bootstrap/dist/css/bootstrap.min.css",
           "./node_modules/font-awesome/css/font-awesome.min.css",
@@ -35,7 +35,7 @@ elixir(mix => {
         .scripts([
           "smartresize.js",
           "admin-custom.js"
-        ], 'public/js/admin-app.js')
+        ], 'public/js/admin-custom.js')
         .scripts([
           "./node_modules/jquery/dist/jquery.js",
           "./node_modules/bootstrap/dist/js/bootstrap.min.js",
