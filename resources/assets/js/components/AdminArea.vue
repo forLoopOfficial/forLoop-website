@@ -13,10 +13,11 @@ import Sidebar from './Sidebar.vue';
 import firebase from 'firebase';
 export default {
   created () {
-    this.user = null;
+    this.user = firebase.auth().currentUser;
     firebase.auth().onAuthStateChanged(function( user ) {
       this.user = user;
-    });
+      console.log(this.user);
+    }.bind(this));
   },
   components: {
     Sidebar

@@ -26,12 +26,22 @@ Vue.use(vueFire);
 
 
 firebase.initializeApp(config);
-firebase.auth().onAuthStateChanged(user => {
-  if(user){
+// firebase.auth().onAuthStateChanged(user => {
+//   if(user){
+//
+//   }else{
+//     router.push({path: 'login'})
+//   }
+// });
 
-  }else{
-    router.push({path: 'login'})
-  }
+const authState = new Promise((resolve, reject) => {
+  firebase.auth().onAuthStateChanged(user => {
+    if(user){
+      resolve(user);
+    }else{
+      reject(new Error("No User"));
+    }
+  });
 });
 
 const App       = require('./components/App.vue');
@@ -100,10 +110,10 @@ const router = new vueRouter({
 });
 router.beforeEach((to, from, next) => {
   console.log(to, from);
-  if(to.meta.requiresAuth && firebase.auth().currentUser == null){
-    next({path: '/login'})
+  if(!to.meta.requiresAuth){
+    next();
   }
-  next();
+  authState.then((user) => next(), (error) => next({path: '/login'}))
 });
 
 new Vue({
