@@ -1,93 +1,45 @@
-'use strict';
 
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    sourcemaps = require('gulp-sourcemaps'),
-    autoprefixer = require('gulp-autoprefixer'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    rename = require('gulp-rename'),
-    clearDist = require('del'),
-    styleInput = 'stylesheets/scss/**/*.scss',
-    styleOutput = 'stylesheets/css',
-    sassOptions = {outputStyle: 'compressed'},
-    autoprefixerOptions = {
-        browsers: ['last 2 versions', '> 5%', 'Firefox > 20']
-    };
+const elixir = require('laravel-elixir');
 
-// Concatenate JS files & Add sourceMaps
+require('laravel-elixir-vue-2');
 
-gulp.task("concatScripts", function() {
-    return gulp.src([
-        'js/bootstrap-tab.js', 
-        'js/ie10-viewport-bug-workaround.js', 
-        'js/custom.js'])
-        .pipe(sourcemaps.init())
-        .pipe(concat("app.js"))
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest("js"));
+/*
+ |--------------------------------------------------------------------------
+ | Elixir Asset Management
+ |--------------------------------------------------------------------------
+ |
+ | Elixir provides a clean, fluent API for defining some basic Gulp tasks
+ | for your Laravel application. By default, we are compiling the Sass
+ | file for our application, as well as publishing vendor resources.
+ |
+ */
+
+elixir(mix => {
+    mix.sass('app.scss')
+       .scripts([
+           'bootstrap-tab.js',
+           'ie10-viewport-bug-workaround.js',
+           'custom.js'
+         ]);
+
+    //admin static resources
+    mix.sass('custom.scss', 'public/css/admin-app.css')
+        .sass('daterangepicker.scss')
+        .webpack('admin-main.js')
+        .styles([
+          "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+          "./node_modules/font-awesome/css/font-awesome.min.css",
+          "./node_modules/nprogress/nprogress.css"
+        ], 'public/css/admin-all.css')
+        .copy('node_modules/font-awesome/fonts', 'public/fonts')
+        .scripts([
+          "smartresize.js",
+          "admin-custom.js"
+        ], 'public/js/admin-custom.js')
+        .scripts([
+          "./node_modules/jquery/dist/jquery.js",
+          "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+          "./node_modules/fastclick/lib/fastclick.js",
+          "./node_modules/nprogress/nprogress.js"
+        ], 'public/js/admin-all.js');
 });
-
-// Minify concatenated file
-
-gulp.task('minifyScripts', ['concatScripts'], function() {
-    return gulp.src('js/app.js')
-        .pipe(uglify())
-        .pipe(rename('app.min.js'))
-        .pipe(gulp.dest("js"));
-});
-
-
-// Compile Sass, Add sourceMaps & Autoprefix Css
-
-gulp.task('compileSass', function () {
-    return gulp
-    // Find All scss files in stylesheet/scss folder
-        .src(styleInput)
-    // initialize Source maps
-        .pipe(sourcemaps.init())
-    // Compile the sass files
-        .pipe(sass(sassOptions).on('error', sass.logError))
-    // Auto prefix styles
-        .pipe(autoprefixer(autoprefixerOptions))
-    // write to sourcemap files
-        .pipe(sourcemaps.write('./'))
-    // Write Results css to output folder
-        .pipe(gulp.dest(styleOutput));
-});
-
-// Delete dist folder
-
-gulp.task("clean", function() {
-    clearDist(['dist', 'stylesheets/css/', 'js/app*.js*']);
-})
-
-// Watch For File Changes in Sass & JS and do the needful
-
-
-gulp.task('watch', function() {
-    gulp.watch(styleInput, ['compileSass']);
-    gulp.watch('js/**/*.js', ['minifyScripts']);
-})
-
-// BUILD
-
-gulp.task('build', ['compileSass', 'minifyScripts', 'watch' ]);
-
-
-// Production
-gulp.task('production', ['clean','build'], function() {
-    return gulp.src([
-        "*.html", 
-        "js/app.min.js", 
-        "img/**",
-        "stylesheets/css/**",
-        "stylesheets/fonts/**"], {base: './'})
-        .pipe(gulp.dest('dist'));
-});
-
-// Default
-
-gulp.task('default', function () {
-    gulp.start('build');
-})
