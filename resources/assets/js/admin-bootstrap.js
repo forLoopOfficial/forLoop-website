@@ -26,23 +26,18 @@ Vue.use(vueFire);
 
 
 firebase.initializeApp(config);
-// firebase.auth().onAuthStateChanged(user => {
-//   if(user){
-//
-//   }else{
-//     router.push({path: 'login'})
-//   }
-// });
 
-const authState = new Promise((resolve, reject) => {
-  firebase.auth().onAuthStateChanged(user => {
-    if(user){
-      resolve(user);
-    }else{
-      reject(new Error("No User"));
-    }
+const authState = function () {
+  return new Promise((resolve, reject) => {
+          firebase.auth().onAuthStateChanged(user => {
+            if(user){
+              resolve(user);
+            }else{
+              reject(new Error("No User"));
+            }
+          });
   });
-});
+}
 
 const App       = require('./components/App.vue');
 const AdminArea = require('./components/AdminArea.vue');
@@ -57,6 +52,12 @@ const routes = [
     children: [
       {
         path: 'login', component: Login
+      },
+      {
+        path: 'dashboard', component: Dashboard,
+        meta: {
+          requiresAuth: true
+        }
       },
       {
         path: 'events', component: Events,
@@ -94,10 +95,7 @@ const routes = [
         ]
       },
       {
-        path: '', component: Dashboard,
-        meta: {
-          requiresAuth: true
-        }
+        path: '', redirect: 'dashboard'
       }
     ]
   }
@@ -109,11 +107,11 @@ const router = new vueRouter({
   routes
 });
 router.beforeEach((to, from, next) => {
-  console.log(to, from);
+
   if(!to.meta.requiresAuth){
-    next();
+    next()
   }
-  authState.then((user) => next(), (error) => next({path: '/login'}))
+  authState().then(user => next(), () => next({path: '/login'}));
 });
 
 new Vue({

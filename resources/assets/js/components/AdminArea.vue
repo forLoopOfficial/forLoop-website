@@ -12,13 +12,15 @@
 import Sidebar from './Sidebar.vue';
 import firebase from 'firebase';
 export default {
+  name: 'AdminArea',
+  //lifecycle methods
   created () {
     this.user = firebase.auth().currentUser;
     firebase.auth().onAuthStateChanged(function( user ) {
       this.user = user;
-      console.log(this.user);
     }.bind(this));
   },
+
   components: {
     Sidebar
   },
@@ -32,5 +34,4 @@ export default {
 </script>
 
 <style>
-
 </style>

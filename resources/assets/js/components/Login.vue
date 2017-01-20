@@ -43,6 +43,11 @@
 <script>
 import firebase from 'firebase';
 export default {
+  //lifecycle methods
+  created () {
+    firebase.auth().signOut();
+  },
+
   data () {
     return {
       email: '',
@@ -60,6 +65,7 @@ export default {
         .catch((error) => console.log(error)) // tell the user an error occurred
     },
     onSignedIn () {
+      console.log('going home');
       this.$router.push({path: '/'})
     }
   }
