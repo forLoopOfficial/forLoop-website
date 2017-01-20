@@ -22,15 +22,6 @@
     </div>
     <!-- Page content -->
 
-
-    <!-- footer content -->
-    <footer>
-      <div class="pull-right">
-        Powered by <a href="https://colorlib.com">Colorlib</a>
-      </div>
-      <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
     <!-- All vender Scripts -->
     <script src="/js/admin-all.js"></script>
 

@@ -43,7 +43,7 @@ const App       = require('./components/App.vue');
 const AdminArea = require('./components/AdminArea.vue');
 const Dashboard = require('./components/Dashboard.vue');
 const Sponsors  = require('./components/Sponsors.vue');
-const Events    = require('./components/Events.vue');
+const Events    = require('./components/events/Events.vue');
 const Login     = require('./components/Login.vue');
 
 //Define admin application routes
@@ -88,6 +88,17 @@ const routes = [
           },
           {
             path: 'members', component: Dashboard,
+            meta: {
+              requiresAuth: true
+            }
+          }
+        ]
+      },
+      {
+        path: 'users', component: Dashboard,
+        children: [
+          {
+            path: 'manage', component: Dashboard,
             meta: {
               requiresAuth: true
             }

@@ -1,5 +1,5 @@
 <template>
-  
+
   <!-- page content -->
   <div class="right_col" role="main">
     <!-- top tiles -->
@@ -40,6 +40,7 @@
 <script>
 
 export default {
+  name: 'Dashboard',
   data () {
     return {
       notes: []

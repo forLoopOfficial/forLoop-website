@@ -1,7 +1,7 @@
 
 <template>
   <div class="">
-    
+
     <div class="col-md-3 left_col">
       <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
@@ -102,8 +102,7 @@
                     <span>Settings</span>
                   </a>
                 </li>
-                <li><a href="javascript:;">Help</a></li>
-                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                <li><a @click="signOut"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
               </ul>
             </li>
 

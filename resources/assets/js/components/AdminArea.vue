@@ -3,6 +3,14 @@
 <div class="">
   <sidebar v-if="user" :user="user"></sidebar>
   <router-view></router-view>
+  <!-- footer content -->
+  <footer>
+    <div class="pull-right">
+      Powered by <a href="https://colorlib.com">Colorlib</a>
+    </div>
+    <div class="clearfix"></div>
+  </footer>
+  <!-- /footer content -->
 </div>
 
 </template>
