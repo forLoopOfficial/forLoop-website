@@ -30,29 +30,29 @@
           <div class="menu_section">
             <h3>General</h3>
             <ul class="nav side-menu">
-              <li><router-link to="users">Manage Users</router-link></li>
+              <li><router-link to="/users/manage">Manage Users</router-link></li>
               <li>
                 <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li>
-                    <router-link to="dashboard">Dashboard</router-link>
+                    <router-link to="/dashboard">Dashboard</router-link>
                   </li>
                   <li>
-                    <router-link to="events/create">Create Event</router-link>
+                    <router-link to="/events/create">Create Event</router-link>
                   </li>
                   <li>
-                    <router-link to="events">View Events</router-link>
+                    <router-link to="/events">View Events</router-link>
                   </li>
                   <li>
-                    <router-link to="sponsors">Manage Sponsors</router-link>
+                    <router-link to="/sponsors">Manage Sponsors</router-link>
                   </li>
                 </ul>
               </li>
               <li><a><i class="fa fa-edit"></i> Pages <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><router-link to="pages/about">About Page</router-link></li>
-                  <li><router-link to="pages/team">Team Page</router-link></li>
-                  <li><router-link to="pages/members">Members Page</router-link></li>
+                  <li><router-link to="/pages/about">About Page</router-link></li>
+                  <li><router-link to="/pages/team">Team Page</router-link></li>
+                  <li><router-link to="/pages/members">Members Page</router-link></li>
                 </ul>
               </li>
               <li><a @click="signOut">Logout</a></li>

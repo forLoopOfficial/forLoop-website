@@ -32,6 +32,7 @@ elixir(mix => {
           "./node_modules/nprogress/nprogress.css"
         ], 'public/css/admin-all.css')
         .copy('node_modules/font-awesome/fonts', 'public/fonts')
+        .copy('node_modules/bootstrap/dist/fonts', 'public/fonts')
         .scripts([
           "smartresize.js",
           "admin-custom.js"

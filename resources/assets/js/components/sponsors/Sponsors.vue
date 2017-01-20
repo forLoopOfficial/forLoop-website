@@ -64,7 +64,6 @@ import firebase from 'firebase';
 import BounceLoader  from 'vue-spinner/src/BounceLoader';
 import Sponsor       from './Sponsor.vue';
 import CreateSponsor from './CreateSponsor.vue';
-import Modal         from './Modal';
 
 const db      = firebase.database();
 const storage = firebase.storage();

@@ -15,11 +15,12 @@ const config = {
  */
 
 window.Vue = require('vue');
-const vueResource = require('vue-resource');
-const vueRouter   = require('vue-router');
-const vueFire     = require('vuefire');
-const firebase    = require('firebase');
-window.firebase   = firebase;
+const vueResource   = require('vue-resource');
+const vueRouter     = require('vue-router');
+const vueFire       = require('vuefire');
+const firebase      = require('firebase');
+const bootstrapVue  = require('bootstrap-vue');
+window.firebase     = firebase;
 Vue.use(vueResource);
 Vue.use(vueRouter);
 Vue.use(vueFire);
@@ -39,12 +40,15 @@ const authState = function () {
   });
 }
 
-const App       = require('./components/App.vue');
-const AdminArea = require('./components/AdminArea.vue');
-const Dashboard = require('./components/Dashboard.vue');
-const Sponsors  = require('./components/Sponsors.vue');
-const Events    = require('./components/events/Events.vue');
-const Login     = require('./components/Login.vue');
+const App         = require('./components/App.vue');
+const AdminArea   = require('./components/AdminArea.vue');
+const Dashboard   = require('./components/Dashboard.vue');
+const ManageUsers = require('./components/users/ManageUsers.vue');
+const UserProfile = require('./components/users/Profile.vue');
+const ViewUsers   = require('./components/users/ViewUsers.vue');
+const Sponsors    = require('./components/sponsors/Sponsors.vue');
+const Events      = require('./components/events/Events.vue');
+const Login       = require('./components/Login.vue');
 
 //Define admin application routes
 const routes = [
@@ -95,12 +99,13 @@ const routes = [
         ]
       },
       {
-        path: 'users', component: Dashboard,
+        path: 'users', component: ManageUsers,
         children: [
           {
-            path: 'manage', component: Dashboard,
+            path: 'manage', component: ViewUsers,
             meta: {
-              requiresAuth: true
+              requiresAuth: true,
+              requiresRoles: ['superadmin']
             }
           }
         ]

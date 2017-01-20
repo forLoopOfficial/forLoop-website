@@ -19,6 +19,8 @@
 <script>
 import Sidebar from './Sidebar.vue';
 import firebase from 'firebase';
+
+const usersRef = firebase.database().ref('users');
 export default {
   name: 'AdminArea',
   //lifecycle methods
@@ -26,6 +28,7 @@ export default {
     this.user = firebase.auth().currentUser;
     firebase.auth().onAuthStateChanged(function( user ) {
       this.user = user;
+      this.mergeUserData();
     }.bind(this));
   },
 
@@ -35,6 +38,20 @@ export default {
   data () {
     return {
       notes: []
+    }
+  },
+  methods: {
+    mergeUserData () {
+
+      if(this.user === null)
+        return;
+
+      let uid = this.user.uid;
+      usersRef.child(uid).once('value').then((snapshot) => {
+        console.log(snapshot);
+        this.user.extra = snapshot;
+      });
+
     }
   }
 }
