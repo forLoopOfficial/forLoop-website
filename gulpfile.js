@@ -29,7 +29,7 @@ elixir(mix => {
         .styles([
           "./node_modules/bootstrap/dist/css/bootstrap.min.css",
           "./node_modules/font-awesome/css/font-awesome.min.css",
-          "./node_modules/nprogress/nprogress.css"
+          "./node_modules/datatables.net-bs/css/dataTables.bootstrap.css"
         ], 'public/css/admin-all.css')
         .copy('node_modules/font-awesome/fonts', 'public/fonts')
         .copy('node_modules/bootstrap/dist/fonts', 'public/fonts')
@@ -38,9 +38,10 @@ elixir(mix => {
           "admin-custom.js"
         ], 'public/js/admin-custom.js')
         .scripts([
-          "./node_modules/jquery/dist/jquery.js",
+          "./node_modules/jquery/dist/jquery.min.js",
           "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-          "./node_modules/fastclick/lib/fastclick.js",
-          "./node_modules/nprogress/nprogress.js"
+          "./node_modules/datatables.net/js/jquery.dataTables.js",
+          "./node_modules/datatables.net-bs/js/dataTables.bootstrap.js",
+          "./node_modules/fastclick/lib/fastclick.js"
         ], 'public/js/admin-all.js');
 });

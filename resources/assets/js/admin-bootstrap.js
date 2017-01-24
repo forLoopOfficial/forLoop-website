@@ -1,5 +1,6 @@
 
 window._ = require('lodash');
+require('datejs');
 // Initialize Firebase
 const config = {
   apiKey: "AIzaSyAcjFtRHmXguek060FhPql3KH_--AXoEjs",
@@ -40,15 +41,17 @@ const authState = function () {
   });
 }
 
-const App         = require('./components/App.vue');
-const AdminArea   = require('./components/AdminArea.vue');
-const Dashboard   = require('./components/Dashboard.vue');
-const ManageUsers = require('./components/users/ManageUsers.vue');
-const UserProfile = require('./components/users/Profile.vue');
-const ViewUsers   = require('./components/users/ViewUsers.vue');
-const Sponsors    = require('./components/sponsors/Sponsors.vue');
-const Events      = require('./components/events/Events.vue');
-const Login       = require('./components/Login.vue');
+const App           = require('./components/App.vue');
+const AdminArea     = require('./components/AdminArea.vue');
+const Dashboard     = require('./components/Dashboard.vue');
+const ManageUsers   = require('./components/users/ManageUsers.vue');
+const UserProfile   = require('./components/users/Profile.vue');
+const ViewUsers     = require('./components/users/ViewUsers.vue');
+const Sponsors      = require('./components/sponsors/Sponsors.vue');
+const ManageEvents  = require('./components/events/ManageEvents.vue');
+const CreateEvent   = require('./components/events/CreateEvent.vue');
+const Events        = require('./components/events/Events.vue');
+const Login         = require('./components/Login.vue');
 
 //Define admin application routes
 const routes = [
@@ -64,10 +67,21 @@ const routes = [
         }
       },
       {
-        path: 'events', component: Events,
-        meta: {
-          requiresAuth: true
-        }
+        path: 'events', component: ManageEvents,
+        children: [
+          {
+            path: 'create', component: CreateEvent,
+            meta: {
+              requiresAuth: true
+            }
+          },
+          {
+            path: '', component: Events,
+            meta: {
+              requiresAuth: true
+            }
+          }
+        ]
       },
       {
         path: 'sponsors', component: Sponsors,

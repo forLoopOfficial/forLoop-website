@@ -1,10 +1,6 @@
 module.exports = {
+  //No longer needed
   resolve: {
     extensions: ['.js', '.vue', '.css', '.json'],
-  },
-  vue: {
-    loaders: {
-      js: 'babel-loader'
-    }
   }
 }

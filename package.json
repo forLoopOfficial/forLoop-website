@@ -31,6 +31,8 @@
     "bootstrap-progressbar": "^0.9.0",
     "bootstrap-vue": "^0.5.2",
     "cropper": "^2.3.0",
+    "datatables.net": "^2.1.1",
+    "datatables.net-bs": "^2.1.1",
     "datejs": "^1.0.0-rc3",
     "fastclick": "^1.0.6",
     "firebase": "latest",
@@ -42,8 +44,13 @@
     "pnotify": "^3.0.0",
     "rxjs": "^5.0.3",
     "select2": "^4.0.2",
+    "twit": "^2.2.5",
     "vue-bulma-modal": "^1.0.1",
+    "vue-datatable": "^1.0.4",
+    "vue-places": "^1.0.1",
     "vue-router": "^2.1.1",
-    "vuefire": "^1.3.0"
+    "vue2-timepicker": "^0.1.4",
+    "vuefire": "^1.3.0",
+    "vuejs-datepicker": "^0.5.4"
   }
 }

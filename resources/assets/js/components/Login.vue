@@ -43,6 +43,7 @@
 <script>
 import firebase from 'firebase';
 export default {
+  name: 'Login',
   //lifecycle methods
   created () {
     firebase.auth().signOut();

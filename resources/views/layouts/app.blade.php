@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="../../favicon.ico">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title> @yield('title') </title>
 
         <!-- Custom styles for this template -->
@@ -208,6 +208,9 @@
             <p class="trademark"> © 2016 forLoop, Nigeria</p>
         </footer>
 
+        <script>
+          window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
+        </script>
         <script src="/js/all.js"></script>
         <script src="/js/app.js"></script>
 
