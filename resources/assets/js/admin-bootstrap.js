@@ -41,17 +41,17 @@ const authState = function () {
   });
 }
 
-const App           = require('./components/App.vue');
-const AdminArea     = require('./components/AdminArea.vue');
-const Dashboard     = require('./components/Dashboard.vue');
-const ManageUsers   = require('./components/users/ManageUsers.vue');
-const UserProfile   = require('./components/users/Profile.vue');
-const ViewUsers     = require('./components/users/ViewUsers.vue');
-const Sponsors      = require('./components/sponsors/Sponsors.vue');
-const ManageEvents  = require('./components/events/ManageEvents.vue');
-const CreateEvent   = require('./components/events/CreateEvent.vue');
-const Events        = require('./components/events/Events.vue');
-const Login         = require('./components/Login.vue');
+const App           = require('./components/AdminApp.vue');
+const AdminArea     = require('./components/admin/AdminArea.vue');
+const Dashboard     = require('./components/admin/Dashboard.vue');
+const ManageUsers   = require('./components/admin/users/ManageUsers.vue');
+const UserProfile   = require('./components/admin/users/Profile.vue');
+const ViewUsers     = require('./components/admin/users/ViewUsers.vue');
+const Sponsors      = require('./components/admin/sponsors/Sponsors.vue');
+const ManageEvents  = require('./components/admin/events/ManageEvents.vue');
+const CreateEvent   = require('./components/admin/events/CreateEvent.vue');
+const Events        = require('./components/admin/events/Events.vue');
+const Login         = require('./components/admin/Login.vue');
 
 //Define admin application routes
 const routes = [

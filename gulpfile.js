@@ -17,10 +17,12 @@ require('laravel-elixir-vue-2');
 elixir(mix => {
     mix.sass('app.scss')
        .scripts([
+           './node_modules/jquery/dist/jquery.min.js',
            'bootstrap-tab.js',
            'ie10-viewport-bug-workaround.js',
            'custom.js'
-         ]);
+         ])
+       .webpack('app.js');
 
     //admin static resources
     mix.sass('custom.scss', 'public/css/admin-app.css')
