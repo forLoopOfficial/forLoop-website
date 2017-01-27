@@ -27,42 +27,19 @@
 
                       <div class="outer-container">
                           <!-- Meeting Item -->
-                          <div class="meeting__item">
+                          <div v-for="upcomingEvent in upcomingEvents" class="meeting__item">
                               <div class="meeting__item__content">
                                   <div class="meeting__item__content__top">
-                                      <a href="" class="meeting__item__title">Using Flutterwave APIs</a>
-                                      <p class="meeting__item__location">Howellside</p>
-                                      <p class="meeting__item__date">16 Sep 2016</p>
+                                      <router-link :to="{ name: 'event', params: { slug: upcomingEvent.url_slug }}" class="meeting__item__title">{{ upcomingEvent.title }}</router-link>
+                                      <p class="meeting__item__location">{{ upcomingEvent.location.name }}</p>
+                                      <p class="meeting__item__date">{{ upcomingEvent.when.date | dateFormat }}</p>
                                   </div>
 
                                   <div class="meeting__item__host">
                                       <div class="meeting__item__host__avatar">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/csswizardry/128.jpg" alt="" class="img-circle inline-block" width="40" height="40">
+                                          <img :src="upcomingEvent.hosts[0].profile_image" alt="" class="img-circle inline-block" width="40" height="40">
                                       </div>
-                                      <div class="meeting__item__host__caption">Hosted by Stephen Shaw</div>
-                                  </div>
-                              </div>
-                              <a href="" class="meeting__item__resource">
-                                  <span class="meeting__item__resource__text">Add to Calendar</span>
-                                  <span class="meeting__item__resource__icon">
-                                      <svg class="icon-calendar-o icon-ss"><use xlink:href="img/icons.svg#icon-calendar-o"></use></svg>
-                                  </span>
-                              </a>
-                          </div>
-                          <!-- Meeting Item -->
-                          <div class="meeting__item">
-                              <div class="meeting__item__content">
-                                  <div class="meeting__item__content__top">
-                                      <a href="" class="meeting__item__title">Using Flutterwave APIs</a>
-                                      <p class="meeting__item__location">Howellside</p>
-                                      <p class="meeting__item__date">16 Sep 2016</p>
-                                  </div>
-
-                                  <div class="meeting__item__host">
-                                      <div class="meeting__item__host__avatar">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/csswizardry/128.jpg" alt="" class="img-circle inline-block" width="40" height="40">
-                                      </div>
-                                      <div class="meeting__item__host__caption">Hosted by Stephen Shaw</div>
+                                      <div class="meeting__item__host__caption">Hosted by {{ upcomingEvent.hosts[0].name }}</div>
                                   </div>
                               </div>
                               <a href="" class="meeting__item__resource">
@@ -89,111 +66,19 @@
 
                       <div class="outer-container">
                           <!-- Meeting Item -->
-                          <div class="meeting__item">
+                          <div v-for="archivedEvent in archivedEvents" class="meeting__item">
                               <div class="meeting__item__content">
                                   <div class="meeting__item__content__top">
-                                      <a href="" class="meeting__item__title">Using Flutterwave APIs</a>
-                                      <p class="meeting__item__location">Howellside</p>
-                                      <p class="meeting__item__date">16 Sep 2016</p>
+                                      <router-link :to="{ name: 'event', params: { slug: archivedEvent.url_slug }}" class="meeting__item__title">{{ archivedEvent.title }}</router-link>
+                                      <p class="meeting__item__location">{{ archivedEvent.location.name }}</p>
+                                      <p class="meeting__item__date">{{ archivedEvent.when.date | dateFormat }}</p>
                                   </div>
 
                                   <div class="meeting__item__host">
                                       <div class="meeting__item__host__avatar">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/csswizardry/128.jpg" alt="" class="img-circle inline-block" width="40" height="40">
+                                          <img :src="archivedEvent.hosts[0].profile_image" alt="" class="img-circle inline-block" width="40" height="40">
                                       </div>
-                                      <div class="meeting__item__host__caption">Hosted by Stephen Shaw</div>
-                                  </div>
-                              </div>
-                              <a href="" class="meeting__item__resource">
-                                  <span class="meeting__item__resource__text">Download Resources</span>
-                                  <span class="meeting__item__resource__icon">
-                                      <svg class="icon-downloads icon-ss"><use xlink:href="img/icons.svg#icon-downloads"></use></svg>
-                                  </span>
-                              </a>
-                          </div>
-                          <!-- Meeting Item -->
-                          <div class="meeting__item">
-                              <div class="meeting__item__content">
-                                  <div class="meeting__item__content__top">
-                                      <a href="" class="meeting__item__title">Using Flutterwave APIs</a>
-                                      <p class="meeting__item__location">Howellside</p>
-                                      <p class="meeting__item__date">16 Sep 2016</p>
-                                  </div>
-
-                                  <div class="meeting__item__host">
-                                      <div class="meeting__item__host__avatar">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/csswizardry/128.jpg" alt="" class="img-circle inline-block" width="40" height="40">
-                                      </div>
-                                      <div class="meeting__item__host__caption">Hosted by Stephen Shaw</div>
-                                  </div>
-                              </div>
-                              <a href="" class="meeting__item__resource">
-                                  <span class="meeting__item__resource__text">Download Resources</span>
-                                  <span class="meeting__item__resource__icon">
-                                      <svg class="icon-downloads icon-ss"><use xlink:href="img/icons.svg#icon-downloads"></use></svg>
-                                  </span>
-                              </a>
-                          </div>
-                          <!-- Meeting Item -->
-                          <div class="meeting__item">
-                              <div class="meeting__item__content">
-                                  <div class="meeting__item__content__top">
-                                      <a href="" class="meeting__item__title">Using Flutterwave APIs</a>
-                                      <p class="meeting__item__location">Howellside</p>
-                                      <p class="meeting__item__date">16 Sep 2016</p>
-                                  </div>
-
-                                  <div class="meeting__item__host">
-                                      <div class="meeting__item__host__avatar">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/csswizardry/128.jpg" alt="" class="img-circle inline-block" width="40" height="40">
-                                      </div>
-                                      <div class="meeting__item__host__caption">Hosted by Stephen Shaw</div>
-                                  </div>
-                              </div>
-                              <a href="" class="meeting__item__resource">
-                                  <span class="meeting__item__resource__text">Download Resources</span>
-                                  <span class="meeting__item__resource__icon">
-                                      <svg class="icon-downloads icon-ss"><use xlink:href="img/icons.svg#icon-downloads"></use></svg>
-                                  </span>
-                              </a>
-                          </div>
-                          <!-- Meeting Item -->
-                          <div class="meeting__item">
-                              <div class="meeting__item__content">
-                                  <div class="meeting__item__content__top">
-                                      <a href="" class="meeting__item__title">Using Flutterwave APIs</a>
-                                      <p class="meeting__item__location">Howellside</p>
-                                      <p class="meeting__item__date">16 Sep 2016</p>
-                                  </div>
-
-                                  <div class="meeting__item__host">
-                                      <div class="meeting__item__host__avatar">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/csswizardry/128.jpg" alt="" class="img-circle inline-block" width="40" height="40">
-                                      </div>
-                                      <div class="meeting__item__host__caption">Hosted by Stephen Shaw</div>
-                                  </div>
-                              </div>
-                              <a href="" class="meeting__item__resource">
-                                  <span class="meeting__item__resource__text">Download Resources</span>
-                                  <span class="meeting__item__resource__icon">
-                                      <svg class="icon-downloads icon-ss"><use xlink:href="img/icons.svg#icon-downloads"></use></svg>
-                                  </span>
-                              </a>
-                          </div>
-                          <!-- Meeting Item -->
-                          <div class="meeting__item">
-                              <div class="meeting__item__content">
-                                  <div class="meeting__item__content__top">
-                                      <a href="" class="meeting__item__title">Using Flutterwave APIs</a>
-                                      <p class="meeting__item__location">Howellside</p>
-                                      <p class="meeting__item__date">16 Sep 2016</p>
-                                  </div>
-
-                                  <div class="meeting__item__host">
-                                      <div class="meeting__item__host__avatar">
-                                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/csswizardry/128.jpg" alt="" class="img-circle inline-block" width="40" height="40">
-                                      </div>
-                                      <div class="meeting__item__host__caption">Hosted by Stephen Shaw</div>
+                                      <div class="meeting__item__host__caption">Hosted by {{ archivedEvent.hosts[0].name }}</div>
                                   </div>
                               </div>
                               <a href="" class="meeting__item__resource">
@@ -233,9 +118,17 @@
 
 
 <script>
+import firebase from 'firebase';
 
+const eventsRef = firebase.database().ref('events');
+const today     = new Date().getTime();
 export default {
-  name: 'MeetupsPage'
+  name: 'MeetupsPage',
+
+  firebase: {
+    upcomingEvents: eventsRef.orderByChild('when/date').startAt(today).limitToFirst(25),
+    archivedEvents: eventsRef.orderByChild('when/date').endAt(today).limitToFirst(25)
+  }
 }
 
 </script>

@@ -47,8 +47,9 @@ const routes = [
     component: TeamPage,
   },
   {
-    path: '/event',
-    component: EventPage,
+    name: 'event',
+    path: '/events/:slug',
+    component: EventPage
   },
   {
     path: '/meetups',
@@ -74,6 +75,14 @@ new Vue({
   el: '#app',
   router,
   ...App
+});
+
+/**
+ * We'll register global filters here
+ */
+
+Vue.filter('dateFormat', (value) => {
+    return new Date(value).toString('dddd MMM d yyyy');//custom format by datejs
 });
 
 /**
