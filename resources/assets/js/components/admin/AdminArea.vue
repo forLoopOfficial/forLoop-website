@@ -53,6 +53,11 @@ export default {
 
     },
     setUserData (user) {
+      if(!user){
+        this.user = null;
+        return;
+      }
+
       this.user = {
         providerData: user.providerData,
         photoURL: user.photoURL,
