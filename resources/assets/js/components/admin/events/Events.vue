@@ -61,12 +61,14 @@ export default {
       let when  = `${date} <br> ${from} - ${to}`;
       let location = `${event.location.name} <br> ${event.location.address}`;
       let attendees = event.attendees ? Object.keys(event.attendees).length : 0;
+      let eventUrl  = `/events/${event.url_slug}`;
+      let action    = `<a href="${eventUrl}" target="blank" class="btn btn-primary">View Event</a>`;
       this.eventsTable.row.add([
         event.title,
         when,
         location,
         attendees,
-        'None'
+        action
       ]).draw();
     });
 
