@@ -59,7 +59,6 @@ export default {
     signInWithPassword () {
       return firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then((userData) => {
-          console.log(userData)
           this.onSignedIn()
           return userData
         })

@@ -129,7 +129,7 @@
               <h4 class="jumbotron__title">Want to be a part of the forLoop Community?</h4>
               <div class="jumbotron__action">
                   <router-link to="/meetups" class="btn btn--primary jumbotron__btn">Attend a Meetup</router-link>
-                  <a href="" class="btn btn--primary jumbotron__btn">Organize a Meetup</a>
+                  <a href="#" class="btn btn--primary jumbotron__btn">Organize a Meetup</a>
               </div>
           </div>
       </section>

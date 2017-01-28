@@ -25,9 +25,10 @@ export default {
   name: 'AdminArea',
   //lifecycle methods
   created () {
-    this.user = firebase.auth().currentUser;
+    let user = firebase.auth().currentUser;
+    this.setUserData(user);
     firebase.auth().onAuthStateChanged(function( user ) {
-      this.user = user;
+      this.setUserData(user);
       this.mergeUserData();
     }.bind(this));
   },
@@ -37,21 +38,29 @@ export default {
   },
   data () {
     return {
-      notes: []
+      user: null
     }
   },
   methods: {
     mergeUserData () {
-
       if(this.user === null)
         return;
 
       let uid = this.user.uid;
       usersRef.child(uid).once('value').then((snapshot) => {
-        console.log(snapshot);
-        this.user.extra = snapshot;
+        this.user.extra = snapshot.val();
       });
 
+    },
+    setUserData (user) {
+      this.user = {
+        providerData: user.providerData,
+        photoURL: user.photoURL,
+        email: user.email,
+        displayName: user.displayName,
+        uid: user.uid,
+        extra: {}
+      };
     }
   }
 }

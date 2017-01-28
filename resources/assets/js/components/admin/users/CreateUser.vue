@@ -43,10 +43,11 @@
             <input v-model="user.last_name" type="text" class="form-control" placeholder="Last Name">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedbacl">
           <label class="control-label col-md-3 col-sm-3 col-xs-12">Twitter Handle</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            <input v-model="user.twitter_handle" type="text" class="form-control col-md-10" placeholder="Twitter Handle">
+            <input v-model="user.twitter_handle" type="text" class="form-control has-feedback-left col-md-10" placeholder="Twitter Handle">
+            <span class="fa fa-at form-control-feedback left"></span>
           </div>
         </div>
 
@@ -65,15 +66,12 @@
 <script>
 import firebase from 'firebase';
 
+const adminCreateApp = firebase.app('AdminCreateApp');
 const usersRef = firebase.database().ref('users');
 export default {
   name: 'CreateUser',
 
   props: ['show'],
-  //Vuefire binding
-  firebase: {
-    users: usersRef
-  },
   data () {
     return {
       user: {}
@@ -87,8 +85,26 @@ export default {
   },
   methods: {
     save () {
-      console.log(this.user);
-      
+      // hack - use another firebase app instance to prevent current user in
+      // default app from being signed out
+      adminCreateApp.auth().createUserWithEmailAndPassword(this.user.email, this.user.password)
+        .then((user) => {
+          console.log(user, this, new Date());
+          let uid = user.uid;
+          let { first_name, last_name, twitter_handle, role, email} = this.user;
+          let newUser = {
+            first_name,
+            last_name,
+            twitter_handle,
+            role,
+            email
+          }
+          usersRef.child(uid).set(newUser);
+          this.close();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     close () {
       this.$children[0].hide();

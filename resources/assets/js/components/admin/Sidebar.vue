@@ -30,7 +30,7 @@
           <div class="menu_section">
             <h3>General</h3>
             <ul class="nav side-menu">
-              <li><router-link to="/users/manage">Manage Users</router-link></li>
+              <li v-if="user.extra.role === 'superadmin'"><router-link to="/users/manage">Manage Users</router-link></li>
               <li>
                 <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
@@ -192,11 +192,6 @@ export default {
   props: [
     'user'
   ],
-  data () {
-    return {
-      notes: []
-    }
-  },
   computed: {
     photoUrl: function() {
       return this.user.photoURL || '/img/user.png';

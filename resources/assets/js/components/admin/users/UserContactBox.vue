@@ -6,10 +6,10 @@
       <div class="col-sm-12">
         <h4 class="brief"><i>{{user.role}}</i></h4>
         <div class="left col-xs-7">
-          <h2>{{user.name}}</h2>
+          <h2>{{user.first_name + ' ' + user.last_name}}</h2>
           <p><strong>About: </strong> {{user.about}} </p>
           <ul class="list-unstyled">
-            <li><i class="fa fa-building"></i> TwitterHandle: {{user.twitter_handle}} </li>
+            <li><i class="fa fa-building"></i> TwitterHandle: @{{user.twitter_handle}} </li>
           </ul>
         </div>
         <div class="right col-xs-5 text-center">
@@ -38,11 +38,6 @@ export default {
   name: 'UserContactBox',
 
   props: ['user'],
-  data () {
-    return {
-      user: []
-    }
-  }
 }
 
 </script>

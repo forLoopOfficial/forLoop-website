@@ -60,11 +60,12 @@ export default {
       let to    = `${event.when.to.h}:${event.when.to.mm} ${event.when.to.A}`;
       let when  = `${date} <br> ${from} - ${to}`;
       let location = `${event.location.name} <br> ${event.location.address}`;
+      let attendees = event.attendees ? Object.keys(event.attendees).length : 0;
       this.eventsTable.row.add([
         event.title,
         when,
         location,
-        event.attendees || 0,
+        attendees,
         'None'
       ]).draw();
     });
