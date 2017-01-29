@@ -166,30 +166,21 @@
           </div>
       </section>
 
-      <!-- Venue Location on the Map -->
-      <section class="venue">
-          <div class="venue__map" style="background-image:url('https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&size=640x370&scale=2&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284')"></div>
-          <div class="venue__tool">
-              <div class="container">
-                  <div class="venue__info-cell">
-                      <div class="venue__info-cell__icon">
-                          <svg class="icon-pin icon-md"><use xlink:href="/img/icons.svg#icon-pin"></use></svg>
-                      </div>
-                      <p class="venue__info-cell__content">Front Wing, First Floor, 19, Town Planning Way, Ilupeju. Lagos, Nigeria </p>
-                  </div>
-              </div>
-          </div>
-      </section>
+      <g-map :location="event.location"></g-map>
     </div>
 </template>
 
 
 <script>
 import firebase from 'firebase';
+import GMap      from './Map.vue';
 
 const db = firebase.database();
 export default {
   name: 'EventPage',
+  components:{
+    GMap
+  },
   created () {
     getEvent(this.$route.params.slug).on('child_changed', (snapshot) => {
       let event = snapshot.val();
@@ -234,7 +225,6 @@ export default {
       event: null
     }
   },
-
   methods: {
     setEvent (event) {
       this.event = event;

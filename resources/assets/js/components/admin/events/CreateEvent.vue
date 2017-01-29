@@ -74,6 +74,7 @@
 
 <script>
 import firebase       from 'firebase';
+import uniqid         from 'uniqid';
 import Places         from 'vue-places';
 import VueTimepicker  from 'vue2-timepicker';
 import Datepicker     from 'vuejs-datepicker';
@@ -92,43 +93,28 @@ export default {
     AddContributor
   },
   data () {
-    return {
-      date: '',
-      event: {
-        title: '',
-        published: false,
-        url_slug: '',
-        background_image_url: '/img/hero3.jpg',
-        when: {
-          date: '',
-          from: {
-            h: '',
-            A: '',
-            mm: ''
-          },
-          to: {
-            h: '',
-            A: '',
-            mm: ''
-          }
-        },
-        location: {
-          name: '',
-          address: ''
-        },
-        description: '',
-        hosts: [],
-        speakers: [],
-        attendees: []
-      }
-    }
+    return this.initialState()
   },
   methods: {
     createEvent () {
-      this.event.when.date = this.date.getTime()
-      this.event.url_slug = this.generateSlug(this.event.title);
+      this.setEventLatLng();
+    },
+    createEventPhase2 () {
+      let slug = this.generateSlug(this.event.title);
+      slug     = `${slug}-`;
+      this.event.when.date = this.date.getTime();
+      this.event.url_slug = uniqid(slug);
+
       console.log(this.event);
-      eventsRef.push(this.event);
+      eventsRef.push(this.event, (error) => {
+        if(error){
+          console.log(error);
+          alert(`Issue creating event: ${error.message}`);
+        }else{
+          alert('Event successfully created');
+          this.$data.event = this.initialState().event;
+        }
+      });
     },
     addSpeaker (contributor) {
       this.event.speakers.push(contributor);
@@ -136,12 +122,65 @@ export default {
     addHost (contributor) {
       this.event.hosts.push(contributor);
     },
+    setEventLatLng () {
+      if(google){
+
+        let geocoder = new google.maps.Geocoder()
+        geocoder.geocode( { 'address': this.event.location.address}, (results, status) => {
+          if (status == 'OK') {
+            let location = results[0].geometry.location;
+            this.event.location.lat = location.lat();
+            this.event.location.lng = location.lng();
+            this.createEventPhase2();
+          } else {
+            alert(`Geocode was not successful for the following reason: ${status} \n Please modify location `);
+          }
+        });
+
+      }else{
+        alert("Geocoder not found. Unable to get location lat/lng");
+      }
+    },
     generateSlug (text) {
       return text.toString().toLowerCase().trim()
                   .replace(/\s+/g, '-')
                   .replace(/&/g, '-and-')
                   .replace(/[^\w\-]+/g, '')
                   .replace(/\-\-+/g, '-');
+    },
+    initialState () {
+      return {
+        date: '',
+        event: {
+          title: '',
+          published: false,
+          url_slug: '',
+          background_image_url: '/img/hero3.jpg',
+          when: {
+            date: '',
+            from: {
+              h: '',
+              A: '',
+              mm: ''
+            },
+            to: {
+              h: '',
+              A: '',
+              mm: ''
+            }
+          },
+          location: {
+            name: '',
+            address: '',
+            lat: 0,
+            lng: 0
+          },
+          description: '',
+          hosts: [],
+          speakers: [],
+          attendees: []
+        }
+      }
     }
   }
 }

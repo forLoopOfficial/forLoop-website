@@ -19,7 +19,7 @@
               <div class="row">
                   <div class="col-md-6 col-md-offset-3">
                     <textarea name="name">
-                      
+
                     </textarea>
                   </div>
                   <div class="col-md-6">
@@ -62,11 +62,15 @@
 
 <script>
 import firebase from 'firebase';
-const db = firebase.database();
+
+const aboutPageRef = firebase.database().ref('about_page');
 export default {
   name: 'AboutPage'
   //lifecycle methods
 
+  firebase: {
+    'about_page': aboutPageRef
+  }
 }
 
 </script>
