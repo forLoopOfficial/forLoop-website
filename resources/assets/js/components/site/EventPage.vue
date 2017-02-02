@@ -106,12 +106,12 @@
                       </div>
                   </div>
                   <div class="info__item__right">
-                      <button class="btn btn--flex btn--primary">
+                      <a class="btn btn--flex btn--primary" :href="'https://twitter.com/intent/follow?screen_name='+event.hosts[0].screen_name">
                           <span class="btn--icon">
                               <svg class="icon-social-twitter icon-sm"><use xlink:href="/img/icons.svg#icon-social-twitter"></use></svg>
                           </span>
                           <span class="btn--text">Follow</span>
-                      </button>
+                      </a>
                   </div>
               </div>
           </div>
@@ -137,12 +137,12 @@
                       </div>
                   </div>
                   <div class="info__item__right">
-                      <button class="btn btn--flex btn--primary">
+                      <a class="btn btn--flex btn--primary" :href="'https://twitter.com/intent/follow?screen_name='+speaker.screen_name">
                           <span class="btn--icon">
                               <svg class="icon-social-twitter icon-sm"><use xlink:href="/img/icons.svg#icon-social-twitter"></use></svg>
                           </span>
                           <span class="btn--text">Follow</span>
-                      </button>
+                      </a>
                   </div>
               </div>
           </div>
@@ -285,6 +285,7 @@ export default {
         console.log(src);
         Vue.nextTick(() => {
           $('.hero--3').css('background-image', src);
+          twttr.widgets.load();
         });
       }
     }
