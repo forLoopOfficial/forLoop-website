@@ -2,13 +2,28 @@
 window._ = require('lodash');
 require('datejs');
 // Initialize Firebase
-const config = {
-  apiKey: "AIzaSyAcjFtRHmXguek060FhPql3KH_--AXoEjs",
-  authDomain: "forloop-74a2a.firebaseapp.com",
-  databaseURL: "https://forloop-74a2a.firebaseio.com",
-  storageBucket: "forloop-74a2a.appspot.com",
-  messagingSenderId: "296148842604"
-};
+let config;
+if(process.env.NODE_ENV !== 'production') {
+  console.log(process.env);
+  config = {
+    apiKey: "AIzaSyAcjFtRHmXguek060FhPql3KH_--AXoEjs",
+    authDomain: "forloop-74a2a.firebaseapp.com",
+    databaseURL: "https://forloop-74a2a.firebaseio.com",
+    storageBucket: "forloop-74a2a.appspot.com",
+    messagingSenderId: "296148842604"
+  };
+
+}else {
+  console.log(process.env);
+  config = {
+    apiKey: "AIzaSyCK_-UkPvs-xjqMriFfntP6xLrCDS3sUqw",
+    authDomain: "forloop-be249.firebaseapp.com",
+    databaseURL: "https://forloop-be249.firebaseio.com",
+    storageBucket: "forloop-be249.appspot.com",
+    messagingSenderId: "332051163114"
+  };
+}
+
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
