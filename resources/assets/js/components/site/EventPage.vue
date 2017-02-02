@@ -276,6 +276,18 @@ export default {
       let size      = attendees ? Object.keys(attendees).length : 0;
       return size == 1 ? `${size} PERSON IS ` :  `${size} PEOPLE ARE `;
     }
+  },
+
+  watch: {
+    event: function (event) {
+      if(event){
+        let src = `url('${event.background_image_url}')`;
+        console.log(src);
+        Vue.nextTick(() => {
+          $('.hero--3').css('background-image', src);
+        });
+      }
+    }
   }
 }
 

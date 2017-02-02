@@ -4,7 +4,7 @@
   <div role="main" class="container">
     <div id="event_head" class="row">
       <div class="pull-left">
-        <button @click="createEvent" class="btn btn-primary" type="button" name="button">Save</button>
+        <button @click="createEvent" :disabled="saving" class="btn btn-primary" type="button" name="button">Save</button>
       </div>
       <div class="pull-right">
         <button class="btn">Preview</button>
@@ -30,7 +30,8 @@
     </div>
     <div class="row">
       <div class="event_contributors_inner">
-        <button class="btn btn-primary" type="button" name="button">Change Background</button>
+        <input @change="changeBackground" style="display:none" id='fopen' type='file' accept="image/jpeg,image/x-png,.png"/>
+        <button @click="openFileDialog" class="btn btn-primary" type="button" name="button">Change Background</button>
         <textarea v-model="event.description" placeholder="Enter Event Description" style="height:200px"></textarea>
       </div>
     </div>
@@ -81,7 +82,10 @@ import Datepicker     from 'vuejs-datepicker';
 import AddContributor from './AddContributor.vue';
 
 const db = firebase.database();
+const storage = firebase.storage();
+
 const eventsRef = db.ref('events');
+const eventImageRef = storage.ref('events');
 export default {
   name: 'CreateEvent',
   //lifecycle methods
@@ -97,6 +101,7 @@ export default {
   },
   methods: {
     createEvent () {
+      this.saving = true;
       this.setEventLatLng();
     },
     createEventPhase2 () {
@@ -105,16 +110,23 @@ export default {
       this.event.when.date = this.date.getTime();
       this.event.url_slug = uniqid(slug);
 
-      console.log(this.event);
-      eventsRef.push(this.event, (error) => {
-        if(error){
-          console.log(error);
-          alert(`Issue creating event: ${error.message}`);
-        }else{
-          alert('Event successfully created');
-          this.$data.event = this.initialState().event;
-        }
+      let imageName = this.tempBackground.name;
+      let imageRef  = eventImageRef.child(imageName);
+      imageRef.put(this.tempBackground).then((snapshot) => {
+        this.event.background_image_url = snapshot.downloadURL;
+        console.log(this.event);
+        eventsRef.push(this.event, (error) => {
+          if(error){
+            console.log(error);
+            alert(`Issue creating event: ${error.message}`);
+          }else{
+            alert('Event successfully created');
+            this.$data.event = this.initialState().event;
+          }
+          this.saving = false;
+        });
       });
+
     },
     addSpeaker (contributor) {
       this.event.speakers.push(contributor);
@@ -134,12 +146,31 @@ export default {
             this.createEventPhase2();
           } else {
             alert(`Geocode was not successful for the following reason: ${status} \n Please modify location `);
+            this.saving = false;
           }
         });
 
       }else{
         alert("Geocoder not found. Unable to get location lat/lng");
+        this.saving = false;
       }
+    },
+    changeBackground (e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+
+      this.tempBackground = files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(files[0])
+      reader.onload = (e => {
+        console.log(e);
+        let src = `url('${e.target.result}')`;
+        $('.event_main').css('background-image', src);
+      })
+    },
+    openFileDialog () {
+      $('#fopen').trigger('click');
     },
     generateSlug (text) {
       return text.toString().toLowerCase().trim()
@@ -150,7 +181,9 @@ export default {
     },
     initialState () {
       return {
+        saving: false,
         date: '',
+        tempBackground: '',
         event: {
           title: '',
           published: false,
@@ -225,8 +258,19 @@ textarea{
   background-color: #7787a3;
   background-image: url(/img/hero3.jpg);
   background-size: cover;
-  background-position: center
+  background-position: center;
+
 }
+.event_main::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      content: ' ';
+      z-index: 1;
+      background-color: rgba(32, 42, 59, 0.56);
+  }
 
 .event_main_content{
   position: relative;

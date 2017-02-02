@@ -38,7 +38,7 @@ export default {
         this.show = true;
         return;
       }
-
+      this.show = false;
       //Not intuitive this also calls the appropriate method based on response
       //Hopefully change later
       this.getHandleDetails(this.twitterHandle);

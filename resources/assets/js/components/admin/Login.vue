@@ -62,7 +62,10 @@ export default {
           this.onSignedIn()
           return userData
         })
-        .catch((error) => console.log(error)) // tell the user an error occurred
+        .catch((error) => {
+          console.log(error)
+          alert(error.message);
+        }) // tell the user an error occurred
     },
     onSignedIn () {
       console.log('going home');
