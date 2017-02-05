@@ -61,8 +61,11 @@ export default {
       let when  = `${date} <br> ${from} - ${to}`;
       let location = `${event.location.name} <br> ${event.location.address}`;
       let attendees = event.attendees ? Object.keys(event.attendees).length : 0;
-      let eventUrl  = `/events/${event.url_slug}`;
-      let action    = `<a href="${eventUrl}" target="blank" class="btn btn-primary">View Event</a>`;
+      let viewEventUrl  = `/events/${event.url_slug}`;
+      let actionView    = `<a href="${viewEventUrl}" target="blank" class="btn btn-primary">View Event</a>`;
+      let editEventUrl  = `/admin/events/edit/${event.url_slug}`;
+      let actionEdit    = `<a href="${editEventUrl}" target="blank" class="btn btn-primary">Edit Event</a>`;
+      let action        = `${actionView}  ${actionEdit}`;
       this.eventsTable.row.add([
         event.title,
         when,

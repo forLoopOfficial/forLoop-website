@@ -66,7 +66,12 @@ const ViewUsers     = require('./components/admin/users/ViewUsers.vue');
 const Sponsors      = require('./components/admin/sponsors/Sponsors.vue');
 const ManageEvents  = require('./components/admin/events/ManageEvents.vue');
 const CreateEvent   = require('./components/admin/events/CreateEvent.vue');
+const EventDetails  = require('./components/admin/events/EventDetails.vue');
 const Events        = require('./components/admin/events/Events.vue');
+const ManagePages   = require('./components/admin/pages/ManagePages.vue');
+const AboutPage     = require('./components/admin/pages/About.vue');
+const MembersPage   = require('./components/admin/pages/Members.vue');
+const TeamPage      = require('./components/admin/pages/Team.vue');
 const Login         = require('./components/admin/Login.vue');
 
 //Define admin application routes
@@ -92,6 +97,12 @@ const routes = [
             }
           },
           {
+            path: 'edit/:slug', component: EventDetails,
+            meta: {
+              requiresAuth: true
+            }
+          },
+          {
             path: '', component: Events,
             meta: {
               requiresAuth: true
@@ -106,22 +117,22 @@ const routes = [
         }
       },
       {
-        path: 'pages', component: Dashboard,
+        path: 'pages', component: ManagePages,
         children: [
           {
-            path: 'about', component: Dashboard,
+            path: 'about', component: AboutPage,
             meta: {
               requiresAuth: true
             }
           },
           {
-            path: 'team', component: Dashboard,
+            path: 'team', component: TeamPage,
             meta: {
               requiresAuth: true
             }
           },
           {
-            path: 'members', component: Dashboard,
+            path: 'members', component: MembersPage,
             meta: {
               requiresAuth: true
             }

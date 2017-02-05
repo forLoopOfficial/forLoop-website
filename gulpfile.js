@@ -16,6 +16,10 @@ require('laravel-elixir-vue-2');
 
 elixir(mix => {
     mix.sass('app.scss')
+       .styles([
+         "./node_modules/slick-carousel/slick/slick.css",
+         "./node_modules/slick-carousel/slick/slick-theme.css"
+       ], 'public/css/app-all.css')
        .scripts([
            './node_modules/jquery/dist/jquery.min.js',
            'bootstrap-tab.js',

@@ -115,6 +115,10 @@ export default {
         console.log(this.newSponsor);
         sponsorsRef.push(this.newSponsor);
       })
+      .catch((error) =>{
+        console.log(error);
+        alert("Issue Uploading Images");
+      })
 
 
     },
