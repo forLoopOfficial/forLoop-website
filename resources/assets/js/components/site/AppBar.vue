@@ -43,9 +43,9 @@
                   </div>
                   <!-- Nav ITEM -->
                   <div class="navbar__item navbar__item--hide">
-                      <router-link to="/meetups" class="navbar__item__link">
-                          <span class="link-caption">Join a</span>
-                          <span class="link-text">Hangout</span>
+                      <router-link to="/members" class="navbar__item__link">
+                          <span class="link-caption">Become a</span>
+                          <span class="link-text">Member</span>
                       </router-link>
                   </div>
               </div>
