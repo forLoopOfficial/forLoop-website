@@ -87,36 +87,6 @@
           </div>
       </div>
 
-      <!-- Host Information -->
-      <section class="info">
-          <div class="container">
-              <div class="info__title text-center">HOST</div>
-              <!-- Host Information item -->
-              <div class="info__item">
-                  <div class="info__item__left">
-                      <!-- Host Information user's avatar -->
-                      <div class="info__item__avatar">
-                          <img :src="event.hosts[0].profile_image" alt="" class="img-circle img-block" height="98" width="98">
-                      </div>
-                      <div class="info__item__content">
-                          <!-- Host Information user's name -->
-                          <div class="info__item__content__name">{{ event.hosts[0].name }}</div>
-                          <!-- Host Information user's other information -->
-                          <div class="info__item__content__detail" style="padding-right:5px">{{ event.hosts[0].description }}</div>
-                      </div>
-                  </div>
-                  <div class="info__item__right">
-                      <a class="btn btn--flex btn--primary" :href="'https://twitter.com/intent/follow?screen_name='+event.hosts[0].screen_name">
-                          <span class="btn--icon">
-                              <svg class="icon-social-twitter icon-sm"><use xlink:href="/img/icons.svg#icon-social-twitter"></use></svg>
-                          </span>
-                          <span class="btn--text">Follow</span>
-                      </a>
-                  </div>
-              </div>
-          </div>
-      </section>
-
       <!-- Speakers Information -->
       <section class="info">
           <div class="container">
@@ -147,6 +117,37 @@
               </div>
           </div>
       </section>
+
+      <!-- Host Information -->
+      <section class="info">
+          <div class="container">
+              <div class="info__title text-center">HOST</div>
+              <!-- Host Information item -->
+              <div class="info__item">
+                  <div class="info__item__left">
+                      <!-- Host Information user's avatar -->
+                      <div class="info__item__avatar">
+                          <img :src="event.hosts[0].profile_image" alt="" class="img-circle img-block" height="98" width="98">
+                      </div>
+                      <div class="info__item__content">
+                          <!-- Host Information user's name -->
+                          <div class="info__item__content__name">{{ event.hosts[0].name }}</div>
+                          <!-- Host Information user's other information -->
+                          <div class="info__item__content__detail" style="padding-right:5px">{{ event.hosts[0].description }}</div>
+                      </div>
+                  </div>
+                  <div class="info__item__right">
+                      <a class="btn btn--flex btn--primary" :href="'https://twitter.com/intent/follow?screen_name='+event.hosts[0].screen_name">
+                          <span class="btn--icon">
+                              <svg class="icon-social-twitter icon-sm"><use xlink:href="/img/icons.svg#icon-social-twitter"></use></svg>
+                          </span>
+                          <span class="btn--text">Follow</span>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </section>
+
 
       <!-- Attendees Information -->
       <section class="info info--2">
