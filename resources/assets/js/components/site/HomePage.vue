@@ -140,32 +140,14 @@
               <h5 class="sponsors__title">Our Sponsors</h5>
               <div class="sponsors__list">
                   <div class="sponsors__list__row sponsors__list__row--1">
-                      <div class="sponsors__list__item">
-                          <a href="" class="sponsors__list__link sponsors__list__link--gigalayer  ">
-                              <img src="img/gigalayer.png" alt="" class="sponsors-image__responsive">
-                          </a>
-                      </div>
-
-                      <div class="sponsors__list__item">
-                          <a href="" class="sponsors__list__link sponsors__list__link--printivo  ">
-                              <img src="img/printivo.png" alt="" class="sponsors-image__responsive">
-                          </a>
-                      </div>
-
-                      <div class="sponsors__list__item">
-                          <a href="" class="sponsors__list__link sponsors__list__link--flutterwave  ">
-                              <img src="img/flutterwave.png" alt="" class="sponsors-image__responsive">
-                          </a>
-                      </div>
-
-                      <div class="sponsors__list__item">
-                          <a href="" class="sponsors__list__link sponsors__list__link--capture  ">
-                              <img src="img/paywithcapture.png" alt="" class="sponsors-image__responsive">
+                      <div v-for="sponsor in sponsors" class="sponsors__list__item">
+                          <a :href="sponsor.link" class="sponsors__list__link sponsors__list__link--capture" target="_blank">
+                              <img :src="sponsor.image_url" alt="" class="sponsors-image__responsive">
                           </a>
                       </div>
                   </div>
 
-                  <div class="sponsors__list__row sponsors__list__row--2">
+                  <div class="sponsors__list__row sponsors__list__row--2" style="display:none">
                       <div class="sponsors__list__item">
                           <a href="" class="sponsors__list__link sponsors__list__link--idea  ">
                               <img src="img/idea.png" alt="" class="sponsors-image__responsive">

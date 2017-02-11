@@ -61,7 +61,7 @@
                               <a href="https://twitter.com/forloopnigeria" class="social-link social-link--twitter">
                                   <svg class="icon-social-twitter icon-sm"><use xlink:href="img/icons.svg#icon-social-twitter"></use></svg>
                               </a>
-                              <a href="" class="social-link social-link--github">
+                              <a href="https://github.com/forLoopOfficial" class="social-link social-link--github">
                                   <svg class="icon-social-github icon-sm"><use xlink:href="img/icons.svg#icon-social-github"></use></svg>
                               </a>
                           </span>
@@ -114,10 +114,10 @@
                           <a href="" class="social-link social-link--facebook">
                               <svg class="icon-social-facebook icon-sm"><use xlink:href="img/icons.svg#icon-social-facebook"></use></svg>
                           </a>
-                          <a href="" class="social-link social-link--twitter">
+                          <a href="https://twitter.com/forloopnigeria" class="social-link social-link--twitter">
                               <svg class="icon-social-twitter icon-sm"><use xlink:href="img/icons.svg#icon-social-twitter"></use></svg>
                           </a>
-                          <a href="" class="social-link social-link--github">
+                          <a href="https://github.com/forLoopOfficial" class="social-link social-link--github">
                               <svg class="icon-social-github icon-sm"><use xlink:href="img/icons.svg#icon-social-github"></use></svg>
                           </a>
                       </span>

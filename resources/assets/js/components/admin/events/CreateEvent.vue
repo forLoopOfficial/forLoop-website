@@ -39,12 +39,12 @@
       <div class="event_contributors_inner">
         <div class="event_contributors_content">
           <h3 class="text-center">Speakers</h3>
-          <div v-for="speaker in event.speakers" class="speaker_content">
+          <div v-for="(speaker, index) in event.speakers" class="speaker_content">
             <div class="icon">
               <img :src="speaker.profile_image">
             </div>
             <div class="inner">
-              <a :href="speaker.twitterURL">{{speaker.name}}</a>
+              <a :href="speaker.twitterURL">{{speaker.name}}</a><button @click="removeSpeaker(index)" class="btn btn-xs btn-danger">X</button>
               <input v-model="speaker.topic" type="text" placeholder="Speaker topic" :style="{ width: '100%' }">
               <textarea v-model="speaker.description" placeholder="Description">
 
@@ -53,12 +53,12 @@
           </div>
           <add-contributor @add="addSpeaker"></add-contributor>
           <h3 class="text-center">Host</h3>
-          <div v-for="host in event.hosts" class="host_content">
+          <div v-for="(host, index) in event.hosts" class="host_content">
             <div class="icon">
               <img :src="host.profile_image">
             </div>
             <div class="inner">
-              <a :href="host.twitterURL">{{host.name}}</a>
+              <a :href="host.twitterURL">{{host.name}}</a><button @click="removeHost(index)" class="btn btn-xs btn-danger">X</button>
               <textarea v-model="host.description" placeholder="Description">
 
               </textarea>
@@ -122,6 +122,7 @@ export default {
           }else{
             alert('Event successfully created');
             this.$data.event = this.initialState().event;
+            this.$router.replace('/');
           }
           this.saving = false;
         });
@@ -133,6 +134,12 @@ export default {
     },
     addHost (contributor) {
       this.event.hosts.push(contributor);
+    },
+    removeSpeaker (index) {
+      this.event.speakers.splice(index, 1);
+    },
+    removeHost (index) {
+      this.event.hosts.splice(index, 1);
     },
     setEventLatLng () {
       if(google){

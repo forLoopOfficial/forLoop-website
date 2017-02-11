@@ -108,12 +108,15 @@ export default {
       console.log(modal);
     },
     addSponsor () {
-      let imageName = this.imageFile.name;
+      let imageName = `${new Date().getTime()}_${this.imageFile.name}`;
       let imageRef  = sponsorsImageRef.child(imageName);
       imageRef.put(this.imageFile).then((snapshot) => {
         this.newSponsor.image_url = snapshot.downloadURL;
         console.log(this.newSponsor);
         sponsorsRef.push(this.newSponsor);
+        this.imageFile = null;
+        this.newSponsor.name = '';
+        alert('Sponsor successfully added');
       })
       .catch((error) =>{
         console.log(error);

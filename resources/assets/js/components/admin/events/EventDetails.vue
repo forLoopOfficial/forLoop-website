@@ -61,6 +61,12 @@
                     <textarea v-model="event.description" placeholder="Enter Event Description" style="height:200px"></textarea>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Upload Resource</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input @change="changeResource" id='fopen' type='file' accept="application/zip,application/x-zip,application/x-zip-compressed"/>
+                  </div>
+                </div>
 
                 <div class="event_contributors_content">
                   <h3 class="text-center">Speakers</h3>
@@ -113,6 +119,7 @@ import Datepicker     from 'vuejs-datepicker';
 import AddContributor from './AddContributor.vue';
 
 const db = firebase.database();
+const resourceStorage = firebase.storage().ref('events');
 export default {
   name: 'EventDetails',
   //lifecycle methods
@@ -149,6 +156,7 @@ export default {
 
   data () {
     return {
+      tempResource: '',
       updating: false,
       event: null
     }
@@ -198,19 +206,36 @@ export default {
     removeSpeaker (index) {
       this.event.speakers.splice(index, 1);
     },
+    changeResource (e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+
+      this.tempResource = files[0];
+    },
     updateEvent () {
       this.updating = true;
       this.setEventLatLng();
     },
     updateEventPhase2 () {
       let eventsRef = db.ref(`events/${this.event.id}`);
-      eventsRef.update(this.event, (error) => {
-        if(error){
-          console.log(error);
-          alert(`Issue creating event: ${error.message}`);
-        }else{
-          alert('Event successfully edited');
-        }
+      let resourceName = `${new Date().getTime()}_${this.tempResource.name}`;
+      let eventResRef  = resourceStorage.child(`${this.event.id}/resources/${resourceName}`);
+      eventResRef.put(this.tempResource).then((snapshot) => {
+        this.event.resourceUrl = snapshot.downloadURL;
+        eventsRef.update(this.event, (error) => {
+          if(error){
+            console.log(error);
+            alert(`Issue editing event: ${error.message}`);
+          }else{
+            alert('Event successfully edited');
+          }
+          this.saving = false;
+        });
+      })
+      .catch((error) =>{
+        console.log(error);
+        alert("Issue Uploading Resource... Please try again");
         this.saving = false;
       });
     }

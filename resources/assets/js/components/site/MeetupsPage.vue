@@ -81,8 +81,14 @@
                                       <div class="meeting__item__host__caption">Hosted by {{ archivedEvent.hosts[0].name }}</div>
                                   </div>
                               </div>
-                              <a href="" class="meeting__item__resource">
+                              <a v-if="archivedEvent.resourceUrl" :href="archivedEvent.resourceUrl" class="meeting__item__resource" target="_blank">
                                   <span class="meeting__item__resource__text">Download Resources</span>
+                                  <span class="meeting__item__resource__icon">
+                                      <svg class="icon-downloads icon-ss"><use xlink:href="img/icons.svg#icon-downloads"></use></svg>
+                                  </span>
+                              </a>
+                              <a v-else class="meeting__item__resource" href="#">
+                                  <span class="meeting__item__resource__text">No Resource</span>
                                   <span class="meeting__item__resource__icon">
                                       <svg class="icon-downloads icon-ss"><use xlink:href="img/icons.svg#icon-downloads"></use></svg>
                                   </span>

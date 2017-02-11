@@ -239,6 +239,7 @@ export default {
         this.addAttendee(user);
       }).catch(function(error) {
         console.log(error);
+        alert(`Please try again: ${error.message}`);
       });
     },
 

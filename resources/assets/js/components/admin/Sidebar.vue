@@ -5,7 +5,10 @@
     <div class="col-md-3 left_col">
       <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-          <a href="/" class="site_title" target="_blank"><i class="fa fa-paw"></i> <span>ForLoop</span></a>
+          <a href="/" class="site_title" target="_blank">
+            <img src="/img/forloop_logo.jpeg" width="50" height="50" style="border-radius:70%"/> 
+            <span>ForLoop</span>
+          </a>
         </div>
 
         <div class="clearfix"></div>
@@ -91,7 +94,8 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="">
               <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <img src="images/img.jpg" alt="">John Doe
+                <img src="images/img.jpg" alt="">
+                {{ user.extra.first_name + ' ' + user.extra.last_name }}
                 <span class=" fa fa-angle-down"></span>
               </a>
               <ul class="dropdown-menu dropdown-usermenu pull-right">
