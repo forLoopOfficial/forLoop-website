@@ -41,7 +41,7 @@
           <h3 class="text-center">Speakers</h3>
           <div v-for="(speaker, index) in event.speakers" class="speaker_content">
             <div class="icon">
-              <img :src="speaker.profile_image">
+              <img :src="speaker.profile_image" width="48" height="48">
             </div>
             <div class="inner">
               <a :href="speaker.twitterURL">{{speaker.name}}</a><button @click="removeSpeaker(index)" class="btn btn-xs btn-danger">X</button>
@@ -55,7 +55,7 @@
           <h3 class="text-center">Host</h3>
           <div v-for="(host, index) in event.hosts" class="host_content">
             <div class="icon">
-              <img :src="host.profile_image">
+              <img :src="host.profile_image" width="48" height="48">
             </div>
             <div class="inner">
               <a :href="host.twitterURL">{{host.name}}</a><button @click="removeHost(index)" class="btn btn-xs btn-danger">X</button>

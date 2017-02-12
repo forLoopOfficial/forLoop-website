@@ -45,16 +45,19 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <form class="" @submit.prevent="addTeamMember">
-              <div class="row">
-                <div class="col-md-6">
-                  <input @change="onFileChange" type="file" class="form-control" placeholder="Upload Images" multiple>
+            <div class="row">
+              <div v-if="newMember" class="speaker_content">
+                <div class="icon">
+                  <img :src="newMember.profile_image" width="48" height="48">
                 </div>
-                <div class="col-md-3">
-                  <button type="submit" class="btn btn-primary" :disabled="uploadingImages">Upload Images</button>
+                <div class="inner">
+                  <label for="">Change name</label><input v-model="newMember.name" type="text" placeholder="Change name" :style="{ width: '100%' }">
+                  <label for="">Change handle</label><input v-model="newMember.twitter_handle" type="text" placeholder="Change handle" :style="{ width: '100%' }">
                 </div>
               </div>
-            </form>
+              <add-contributor @add="addProfile"></add-contributor>
+              <button @click="addTeamMember" class="btn btn-success" :disabled="addingMember">Save Member</button>
+            </div>
           </div>
         </div>
       </div>
@@ -73,40 +76,18 @@
 
           <div class="x_content">
             <div class="row">
-              <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+              <div v-for="(member, key) in team_page.members" class="col-md-4 col-sm-4 col-xs-12 profile_details">
                 <div class="well profile_view">
                   <div class="col-sm-12">
-                    <h4 class="brief"><i>Digital Strategist</i></h4>
                     <div class="left col-xs-7">
-                      <h2>Nicole Pearson</h2>
-                      <p><strong>About: </strong> Web Designer / UX / Graphic Artist / Coffee Lover </p>
-                      <ul class="list-unstyled">
-                        <li><i class="fa fa-building"></i> Address: </li>
-                        <li><i class="fa fa-phone"></i> Phone #: </li>
-                      </ul>
+                      <h2>{{member.name}}</h2>
                     </div>
                     <div class="right col-xs-5 text-center">
-                      <img src="images/img.jpg" alt="" class="img-circle img-responsive">
+                      <img :src="member.profile_image" alt="" class="img-circle img-responsive" width="48" height="48">
                     </div>
                   </div>
                   <div class="col-xs-12 bottom text-center">
-                    <div class="col-xs-12 col-sm-6 emphasis">
-                      <p class="ratings">
-                        <a>4.0</a>
-                        <a href="#"><span class="fa fa-star"></span></a>
-                        <a href="#"><span class="fa fa-star"></span></a>
-                        <a href="#"><span class="fa fa-star"></span></a>
-                        <a href="#"><span class="fa fa-star"></span></a>
-                        <a href="#"><span class="fa fa-star-o"></span></a>
-                      </p>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 emphasis">
-                      <button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
-                        </i> <i class="fa fa-comments-o"></i> </button>
-                      <button type="button" class="btn btn-primary btn-xs">
-                        <i class="fa fa-user"> </i> View Profile
-                      </button>
-                    </div>
+                    <button @click="removeMember(key)" class="btn btn-xs btn-danger" name="button">X</button>
                   </div>
                 </div>
               </div>
@@ -122,15 +103,20 @@
 
 <script>
 import firebase from 'firebase';
+import AddContributor from '../events/AddContributor.vue';
 
 const teamPageRef = firebase.database().ref('team_page');
 const teamPageImageRef = firebase.storage().ref('team_page');
 export default {
   name: 'TeamPage',
+  components: {
+    AddContributor
+  },
   //lifecycle methods
 
   data () {
     return {
+      newMember: null,
       updatingDescription: false,
       addingMember: false
     }
@@ -157,35 +143,28 @@ export default {
         this.updatingDescription = false;
       });
     },
-    uploadImages () {
-      this.uploadingImages = true;
-      let imagesPromise = this.imageFiles.map((file) => {
-        return aboutPageImageRef.child(file.name).put(file);
-      });
-      Promise.all(imagesPromise).then((snapshots) => {
-        snapshots.forEach((snapshot, index) => {
-          let image = {
-            image_url: snapshot.downloadURL,
-            order: index
-          }
-          aboutPageRef.child('images').push(image);
-        });
-        this.uploadingImages = false;
-        alert("Images Uploaded");
-      })
-      .catch((error) =>{
-        this.uploadImages = false;
-        console.log(error);
-        alert("Issue Uploading Images");
-      })
+    addProfile (member) {
+      console.log(member);
+      this.newMember = {
+        name: member.name,
+        twitter_handle: member.screen_name,
+        profile_image: member.profile_image
+      }
     },
-    onFileChange (e) {
-      this.imageFiles = [];
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length)
-        return;
-      for(let i = 0; i < files.length; i++)
-        this.imageFiles.push(files[i]);
+    addTeamMember () {
+      this.addingMember = true;
+      teamPageRef.child('members').push(this.newMember).then(() => {
+        this.addingMember = false;
+        alert('Member successfully added')
+      })
+      .catch((error) => {
+        this.addingMember = false;
+        alert(`Issue adding member: ${error.message}`);
+      });
+    },
+    removeMember (key) {
+      console.log(`Removing key: ${key}`);
+      teamPageRef.child(`members/${key}`).remove();
     }
   }
 

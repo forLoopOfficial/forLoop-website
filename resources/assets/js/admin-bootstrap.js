@@ -60,6 +60,7 @@ const authState = function () {
 const App           = require('./components/AdminApp.vue');
 const AdminArea     = require('./components/admin/AdminArea.vue');
 const Dashboard     = require('./components/admin/Dashboard.vue');
+const Subscribers   = require('./components/admin/Subscribers.vue');
 const ManageUsers   = require('./components/admin/users/ManageUsers.vue');
 const UserProfile   = require('./components/admin/users/Profile.vue');
 const ViewUsers     = require('./components/admin/users/ViewUsers.vue');
@@ -83,6 +84,12 @@ const routes = [
       },
       {
         path: 'dashboard', component: Dashboard,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'subscribers', component: Subscribers,
         meta: {
           requiresAuth: true
         }

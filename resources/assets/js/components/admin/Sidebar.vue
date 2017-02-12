@@ -6,7 +6,7 @@
       <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
           <a href="/" class="site_title" target="_blank">
-            <img src="/img/forloop_logo.jpeg" width="50" height="50" style="border-radius:70%"/> 
+            <img src="/img/forloop_logo.jpeg" width="50" height="50" style="border-radius:70%"/>
             <span>ForLoop</span>
           </a>
         </div>
@@ -48,6 +48,9 @@
                   </li>
                   <li>
                     <router-link to="/sponsors">Manage Sponsors</router-link>
+                  </li>
+                  <li>
+                    <router-link to="/subscribers">Manage Subscribers</router-link>
                   </li>
                 </ul>
               </li>

@@ -60,11 +60,12 @@ export default {
       });
     },
     emitContributor (contributor) {
+      let profile_image = contributor.profile_image_url_https.replace(/_normal/, "");
       this.contributor = {
         name: contributor.name,
         screen_name: contributor.screen_name,
         description: contributor.description,
-        profile_image: contributor.profile_image_url_https,
+        profile_image: profile_image,
         twitterURL: `https://twitter.com/${contributor.screen_name}`
       }
       this.$emit('add', this.contributor);

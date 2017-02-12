@@ -9,7 +9,7 @@
         <div class="tools tools-bottom">
           <a :href="sponsor.link" target="_blank"><i class="fa fa-link"></i></a>
           <a href="#"><i class="fa fa-pencil"></i></a>
-          <a href="#"><i class="fa fa-times"></i></a>
+          <a @click="removeSponsor(sponsor['.key'])"><i class="fa fa-times"></i></a>
         </div>
       </div>
     </div>
@@ -24,13 +24,20 @@
 <script>
 import firebase from 'firebase';
 const db = firebase.database();
+const sponsorsRef = db.ref('sponsors');
 export default {
   name: 'Sponsor',
   //lifecycle methods
 
   props: [
     "sponsor"
-  ]
+  ],
+  methods: {
+    removeSponsor (key) {
+      console.log(`Removing key: ${key}`);
+      sponsorsRef.child(key).set(null);
+    }
+  }
 
 }
 

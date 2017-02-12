@@ -196,32 +196,18 @@
           </div>
       </section>
 
-      <!-- Jumbotron -->
-      <section class="jumbotron">
-          <div class="container">
-              <h2 class="jumbotron__title jumbotron__title--2">Get notified about Upcoming Meetups</h2>
-              <div class="jumbotron__action jumbotron__action--maxsize">
-                  <form action="" class="form">
-                      <div class="outer-container">
-                          <div class="input-section">
-                              <input type="text" class="form__input" placeholder="Email Address" />
-                          </div>
-                          <div class="submit-button">
-                              <button type="submit" class="btn btn--primary btn--block">Notify Me</button>
-                          </div>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </section>
+      <add-subscriber></add-subscriber>
     </div>
 </template>
 
 
 <script>
-
+import AddSubscriber from './AddSubscriber.vue';
 export default {
-  name: 'MembersPage'
+  name: 'MembersPage',
+  components: {
+    AddSubscriber
+  }
 }
 
 </script>

@@ -74,7 +74,7 @@
 
           <div class="x_content">
             <div class="row">
-              <div v-for="image in about_page.images" class="col-md-55">
+              <div v-for="(image, key) in about_page.images" class="col-md-55">
                 <div class="thumbnail">
                   <div class="image view view-first">
                     <img style="width: 100%; display: block;" :src="image.image_url" alt="image" />
@@ -82,8 +82,8 @@
                       <p>{{ image.order }}</p>
                       <div class="tools tools-bottom">
                         <a :href="image.link" target="_blank"><i class="fa fa-link"></i></a>
-                        <a href="#"><i class="fa fa-pencil"></i></a>
-                        <a href="#"><i class="fa fa-times"></i></a>
+                        <a href=""><i class="fa fa-pencil"></i></a>
+                        <a @click="removeImage(key)"><i class="fa fa-times"></i></a>
                       </div>
                     </div>
                   </div>
@@ -169,6 +169,11 @@ export default {
         return;
       for(let i = 0; i < files.length; i++)
         this.imageFiles.push(files[i]);
+    },
+    removeImage (key) {
+      console.log(`removing ${key}`);
+      this.$firebaseRefs.about_page.child(`images/${key}`).remove();
+      alert('Image successfully removed');
     }
   }
 }

@@ -72,7 +72,7 @@
                   <h3 class="text-center">Speakers</h3>
                   <div v-for="(speaker, index) in event.speakers" class="speaker_content">
                     <div class="icon">
-                      <img :src="speaker.profile_image">
+                      <img :src="speaker.profile_image" width="48" height="48">
                     </div>
                     <div class="inner">
                       <a :href="speaker.twitterURL">{{speaker.name}}</a><button @click="removeSpeaker(index)" class="btn btn-xs btn-danger">X</button>
@@ -86,7 +86,7 @@
                   <h3 class="text-center">Host</h3>
                   <div v-for="(host, index) in event.hosts" class="host_content">
                     <div class="icon">
-                      <img :src="host.profile_image">
+                      <img :src="host.profile_image" width="48" height="48">
                     </div>
                     <div class="inner">
                       <a :href="host.twitterURL">{{host.name}}</a><button @click="removeHost(index)" class="btn btn-xs btn-danger">X</button>
@@ -156,7 +156,7 @@ export default {
 
   data () {
     return {
-      tempResource: '',
+      tempResource: "",
       updating: false,
       event: null
     }
@@ -219,10 +219,27 @@ export default {
     },
     updateEventPhase2 () {
       let eventsRef = db.ref(`events/${this.event.id}`);
-      let resourceName = `${new Date().getTime()}_${this.tempResource.name}`;
-      let eventResRef  = resourceStorage.child(`${this.event.id}/resources/${resourceName}`);
-      eventResRef.put(this.tempResource).then((snapshot) => {
-        this.event.resourceUrl = snapshot.downloadURL;
+      if(this.tempResource != ""){
+        let resourceName = `${new Date().getTime()}_${this.tempResource.name}`;
+        let eventResRef  = resourceStorage.child(`${this.event.id}/resources/${resourceName}`);
+        eventResRef.put(this.tempResource).then((snapshot) => {
+          this.event.resourceUrl = snapshot.downloadURL;
+          eventsRef.update(this.event, (error) => {
+            if(error){
+              console.log(error);
+              alert(`Issue editing event: ${error.message}`);
+            }else{
+              alert('Event successfully edited');
+            }
+            this.saving = false;
+          });
+        })
+        .catch((error) =>{
+          console.log(error);
+          alert("Issue Uploading Resource... Please try again");
+          this.saving = false;
+        });
+      }else{
         eventsRef.update(this.event, (error) => {
           if(error){
             console.log(error);
@@ -232,12 +249,7 @@ export default {
           }
           this.saving = false;
         });
-      })
-      .catch((error) =>{
-        console.log(error);
-        alert("Issue Uploading Resource... Please try again");
-        this.saving = false;
-      });
+      }
     }
   },
 

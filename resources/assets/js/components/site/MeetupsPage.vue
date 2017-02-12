@@ -101,35 +101,22 @@
           </div>
       </div>
 
-      <!-- Jumbotron -->
-      <section class="jumbotron">
-          <div class="container">
-              <h2 class="jumbotron__title jumbotron__title--2">Get notified about Upcoming Meetups</h2>
-              <div class="jumbotron__action jumbotron__action--maxsize">
-                  <form action="" class="form">
-                      <div class="outer-container">
-                          <div class="input-section">
-                              <input type="text" class="form__input" placeholder="Email Address" />
-                          </div>
-                          <div class="submit-button">
-                              <button type="submit" class="btn btn--primary btn--block">Notify Me</button>
-                          </div>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </section>
+      <add-subscriber></add-subscriber>
     </div>
 </template>
 
 
 <script>
 import firebase from 'firebase';
+import AddSubscriber from './AddSubscriber.vue';
 
 const eventsRef = firebase.database().ref('events');
 const today     = new Date().getTime();
 export default {
   name: 'MeetupsPage',
+  components: {
+    AddSubscriber
+  },
 
   firebase: {
     upcomingEvents: eventsRef.orderByChild('when/date').startAt(today).limitToFirst(25),
