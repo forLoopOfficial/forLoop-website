@@ -282,7 +282,7 @@ export default {
 
   watch: {
     event: function (event) {
-      if(event){
+      if(event && event.background_image_url){
         let src = `url('${event.background_image_url}')`;
         console.log(src);
         Vue.nextTick(() => {

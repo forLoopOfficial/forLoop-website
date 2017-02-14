@@ -101,6 +101,10 @@ export default {
   },
   methods: {
     createEvent () {
+      if(!this.tempBackground){
+        alert("Please Change Background Image");
+        return;
+      }
       this.saving = true;
       this.setEventLatLng();
     },
@@ -122,7 +126,7 @@ export default {
           }else{
             alert('Event successfully created');
             this.$data.event = this.initialState().event;
-            this.$router.replace('/');
+            this.$router.replace('/events');
           }
           this.saving = false;
         });
