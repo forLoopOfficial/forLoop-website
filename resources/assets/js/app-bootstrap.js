@@ -35,6 +35,7 @@ const vueResource   = require('vue-resource');
 const vueRouter     = require('vue-router');
 const vueFire       = require('vuefire');
 const firebase      = require('firebase');
+const bootstrapVue  = require('bootstrap-vue');
 window.firebase     = firebase;
 Vue.use(vueResource);
 Vue.use(vueRouter);
