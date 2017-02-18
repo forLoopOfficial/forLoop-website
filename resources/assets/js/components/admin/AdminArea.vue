@@ -49,6 +49,8 @@ export default {
       let uid = this.user.uid;
       usersRef.child(uid).once('value').then((snapshot) => {
         this.user.extra = snapshot.val();
+        if(!this.user.extra)
+          this.setUserData(null);
       });
 
     },

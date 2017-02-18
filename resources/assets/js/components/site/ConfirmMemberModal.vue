@@ -65,16 +65,11 @@
 <script>
 import firebase from 'firebase';
 
-const usersRef = firebase.database().ref('users');
+const membersRef = firebase.database().ref('members_page/members');
 export default {
   name: 'ConfirmMember',
 
   props: ['show', 'user'],
-  data () {
-    return {
-      member: {}
-    }
-  },
   watch: {
     show: function (val, old) {
       if(val)
@@ -86,9 +81,9 @@ export default {
 
     },
     save () {
-      // hack - use another firebase app instance to prevent current user in
-      // default app from being signed out
-      console.log('close')
+      membersRef.child(this.user.uid).set(this.user);
+      console.log('close');
+      this.close();
     },
     close () {
       this.$children[0].hide();

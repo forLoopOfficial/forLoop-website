@@ -40,25 +40,25 @@
                       </div>
                   </div>
                   <!-- Members List Item -->
-                  <div class="members__list__item text-center">
+                  <div v-for="member in members_page.members" class="members__list__item text-center">
                       <div class="members__list__item__top">
                           <div class="members__avatar">
-                              <img src="img/img1.png" alt="" class="img-circle" height="72" width="72">
+                              <img :src="member.photoUrl" alt="" class="img-circle" height="72" width="72">
                           </div>
-                          <div class="members__name">Edgar Wilkins</div>
-                          <div class="members__location">East Mauriceburgh</div>
+                          <div class="members__name">{{member.displayName}}</div>
+                          <div class="members__location">{{member.location}}</div>
                           <div class="members__social">
-                              <a href="" class="members__social__item">
+                              <a :href="member.github_link" class="members__social__item" target="_blank">
                                   <svg class="icon-social-github icon-md"><use xlink:href="img/icons.svg#icon-social-github"></use></svg>
                               </a>
-                              <a href="" class="members__social__item">
+                              <a :href="member.twitter_link" class="members__social__item" target="_blank">
                                   <svg class="icon-social-twitter icon-md"><use xlink:href="img/icons.svg#icon-social-twitter"></use></svg>
                               </a>
                           </div>
                       </div>
                       <div class="members__list__item__bottom">
-                          <div class="members__title">Front End Developer</div>
-                          <div class="members__skilllist">HTML, CSS, Javascript, Design</div>
+                          <div class="members__title">{{member.role}}</div>
+                          <div class="members__skilllist">{{member.skills}}</div>
                       </div>
                   </div>
 
@@ -102,7 +102,6 @@ export default {
       let provider = new firebase.auth.TwitterAuthProvider();
       provider.setCustomParameters({'screen_name':'forLoopNigeria'});
       firebase.auth().signInWithPopup(provider).then((result) =>{
-        console.log(result)
         let photoUrl = result.user.photoURL.replace(/_normal/, "")
         this.user = {
             photoUrl: photoUrl,
@@ -111,7 +110,6 @@ export default {
             uid: result.user.uid
         };
         this.showConfirmDialog();
-        console.log(this.user);
       }).catch(function(error) {
         console.log(error);
         alert(`Please try again: ${error.message}`);
