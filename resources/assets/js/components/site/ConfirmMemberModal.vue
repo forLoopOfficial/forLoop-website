@@ -81,8 +81,8 @@ export default {
 
     },
     save () {
+      this.user.skills = this.user.skills.split(",");
       membersRef.child(this.user.uid).set(this.user);
-      console.log('close');
       this.close();
     },
     close () {

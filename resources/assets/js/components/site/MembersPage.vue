@@ -3,15 +3,15 @@
       <!-- About Section -->
       <section class="about">
           <div class="container">
-              <h1 class="about__title">forLoop Memebers</h1>
+              <h1 class="about__title">forLoop Members</h1>
               <p class="about__content">
-                {{members_page.description}}
+                {{description[".value"]}}
               </p>
               <div class="section__form">
-                  <form action="" class="form">
+                  <form @submit.prevent action="" class="form">
                       <div class="outer-container">
                           <div class="input-section position-relative">
-                              <input type="text" class="form__input form__input--iconPresent" placeholder="Search for forLoop Members" />
+                              <input v-model="query" type="text" class="form__input form__input--iconPresent" placeholder="Search for forLoop Members" />
                               <div class="input-section__icon position-absolute">
                                   <svg class="icon-ios-search-strong icon-md"><use xlink:href="img/icons.svg#icon-ios-search-strong"></use></svg>
                               </div>
@@ -40,7 +40,7 @@
                       </div>
                   </div>
                   <!-- Members List Item -->
-                  <div v-for="member in members_page.members" class="members__list__item text-center">
+                  <div v-for="member in members" class="members__list__item text-center">
                       <div class="members__list__item__top">
                           <div class="members__avatar">
                               <img :src="member.photoUrl" alt="" class="img-circle" height="72" width="72">
@@ -58,7 +58,7 @@
                       </div>
                       <div class="members__list__item__bottom">
                           <div class="members__title">{{member.role}}</div>
-                          <div class="members__skilllist">{{member.skills}}</div>
+                          <div class="members__skilllist">{{ displaySkills(member.skills) }}</div>
                       </div>
                   </div>
 
@@ -67,7 +67,7 @@
       </section>
 
       <add-subscriber></add-subscriber>
-      <confirm-member-modal :show="show" :user="user"></confirm-member-modal>
+      <confirm-member-modal :show="show" :user="member"></confirm-member-modal>
     </div>
 </template>
 
@@ -77,33 +77,54 @@ import firebase from 'firebase';
 import AddSubscriber from './AddSubscriber.vue';
 import ConfirmMemberModal from './ConfirmMemberModal.vue';
 
-const membersPageRef = firebase.database().ref('members_page');
+const membersPageDescRef = firebase.database().ref('members_page/description');
 export default {
   name: 'MembersPage',
   components: {
     AddSubscriber,
     ConfirmMemberModal
   },
+  beforeCreate () {
+    this.membersSearch = algoliaClient.initIndex("dev_members");
+    this.membersSearch.search("").then((results) => {
+      this.members = results.hits;
+    })
+    .catch((err) => console.log(err))
+  },
 
   data () {
     return {
-      user: {},
-      show: false
+      member: {},
+      members: [],
+      show: false,
+      query: ""
     }
   },
   firebase: {
-    members_page: {
-      source: membersPageRef,
+    description: {
+      source: membersPageDescRef,
       asObject: true
     }
   },
   methods: {
+    displaySkills (skills) {
+      return skills.join(", ");
+    },
+    searchMembers: _.debounce(function(query) {
+      this.membersSearch.search(query).then(results => {
+        this.members = results.hits;
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }, 500
+    ),
     becomeMember () {
       let provider = new firebase.auth.TwitterAuthProvider();
       provider.setCustomParameters({'screen_name':'forLoopNigeria'});
       firebase.auth().signInWithPopup(provider).then((result) =>{
         let photoUrl = result.user.photoURL.replace(/_normal/, "")
-        this.user = {
+        this.member = {
             photoUrl: photoUrl,
             email: result.user.email,
             displayName: result.user.displayName,
@@ -118,6 +139,12 @@ export default {
     showConfirmDialog () {
       this.show = true;
     },
+  },
+  watch: {
+    query(query) {
+
+      this.searchMembers(query);
+    }
   }
 }
 

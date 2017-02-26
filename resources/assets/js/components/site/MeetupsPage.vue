@@ -117,11 +117,42 @@ export default {
   components: {
     AddSubscriber
   },
-
-  firebase: {
-    upcomingEvents: eventsRef.orderByChild('when/date').startAt(today).limitToFirst(25),
-    archivedEvents: eventsRef.orderByChild('when/date').endAt(today).limitToFirst(25)
+  beforeCreate() {
+    let queries = [
+      {
+        indexName: "dev_events",
+        query: "",
+        params: {
+          filters: `published:true AND when.date >= ${today}`
+        }
+      },
+      {
+        indexName: "dev_events",
+        query: "",
+        params: {
+          filters: `published:true AND when.date < ${today}`
+        }
+      }
+    ];
+    algoliaClient.search(queries).then((results) => {
+      this.upcomingEvents = results.results[0].hits;
+      this.archivedEvents = results.results[1].hits;
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+  data() {
+    return {
+      upcomingEvents: [],
+      archivedEvents: []
+    }
   }
+
+  // firebase: {
+  //   upcomingEvents: eventsRef.orderByChild('when/date').startAt(today).limitToFirst(25),
+  //   archivedEvents: eventsRef.orderByChild('when/date').endAt(today).limitToFirst(25)
+  // }
 }
 
 </script>

@@ -36,12 +36,14 @@ const vueRouter     = require('vue-router');
 const vueFire       = require('vuefire');
 const firebase      = require('firebase');
 const bootstrapVue  = require('bootstrap-vue');
+const algolia       = require('algoliasearch');
 window.firebase     = firebase;
 Vue.use(vueResource);
 Vue.use(vueRouter);
 Vue.use(vueFire);
 
-
+const algoliaClient = new algolia("3O8L0EHCV6", "684c18cb580eed969bb80b18c2dab3f7");
+window.algoliaClient = algoliaClient;
 firebase.initializeApp(config);
 
 const App           = require('./components/App.vue');

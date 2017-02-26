@@ -14,7 +14,6 @@
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "bootstrap-sass": "^3.3.7",
-    "bulma": "^0.3.1",
     "gulp": "^3.9.1",
     "jquery": "^3.1.0",
     "laravel-elixir": "^6.0.0-9",
@@ -26,6 +25,7 @@
   },
   "dependencies": {
     "@google/maps": "^0.3.1",
+    "algoliasearch": "^3.21.1",
     "animate.css": "^3.5.1",
     "autosize": "^3.0.15",
     "bootstrap": "^3.3.7",

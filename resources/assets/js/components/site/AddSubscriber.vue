@@ -3,7 +3,8 @@
     <section class="jumbotron">
         <div class="container">
             <h2 class="jumbotron__title jumbotron__title--2">Get notified about Upcoming Meetups</h2>
-            <div class="jumbotron__action jumbotron__action--maxsize">
+            <transition name="custom-leave" leave-active-class="animated bounceOutRight">
+            <div v-if="!hasSubscribed" class="jumbotron__action jumbotron__action--maxsize">
                 <form v-on:submit.prevent="addSubscriber" class="form">
                     <div class="outer-container">
                         <div class="input-section">
@@ -15,6 +16,12 @@
                     </div>
                 </form>
             </div>
+          </transition>
+            <transition name="custom-enter" enter-active-class="animated tada">
+            <div v-if="hasSubscribed" class="jumbotron__action jumbotron__action--maxsize">
+                <h2>Thank you for subscribing</h2>
+            </div>
+          </transition>
         </div>
     </section>
 </template>
@@ -28,13 +35,14 @@ export default {
   name: 'AddSubscriber',
   data () {
     return {
-      subscriber: ''
+      subscriber: '',
+      hasSubscribed: false
     }
   },
   methods: {
     addSubscriber (e) {
       subscribersRef.push(this.subscriber);
-      alert("You have been subscribed")
+      this.hasSubscribed = true;
     }
   }
 }
