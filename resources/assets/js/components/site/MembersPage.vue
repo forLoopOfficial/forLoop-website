@@ -85,7 +85,7 @@ export default {
     ConfirmMemberModal
   },
   beforeCreate () {
-    this.membersSearch = algoliaClient.initIndex("dev_members");
+    this.membersSearch = algoliaClient.initIndex("members");
     this.membersSearch.search("").then((results) => {
       this.members = results.hits;
     })

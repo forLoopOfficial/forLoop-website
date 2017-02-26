@@ -110,7 +110,6 @@
 import firebase from 'firebase';
 import AddSubscriber from './AddSubscriber.vue';
 
-const eventsRef = firebase.database().ref('events');
 const today     = new Date().getTime();
 export default {
   name: 'MeetupsPage',
@@ -120,14 +119,14 @@ export default {
   beforeCreate() {
     let queries = [
       {
-        indexName: "dev_events",
+        indexName: "events",
         query: "",
         params: {
           filters: `published:true AND when.date >= ${today}`
         }
       },
       {
-        indexName: "dev_events",
+        indexName: "events",
         query: "",
         params: {
           filters: `published:true AND when.date < ${today}`
@@ -148,11 +147,6 @@ export default {
       archivedEvents: []
     }
   }
-
-  // firebase: {
-  //   upcomingEvents: eventsRef.orderByChild('when/date').startAt(today).limitToFirst(25),
-  //   archivedEvents: eventsRef.orderByChild('when/date').endAt(today).limitToFirst(25)
-  // }
 }
 
 </script>
