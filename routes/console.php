@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
+use App\Services\AlgoliaSyncService;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,12 @@ Artisan::command('inspire', function () {
 })->describe('Display an inspiring quote');
 
 Artisan::command('reindex', function () {
-    $this->comment(Inspiring::quote());
-})->describe('Display an inspiring quote');
+    $output = AlgoliaSyncService::sync();
+    foreach($output as $key => $data){
+      if($data['status'] == "failed")
+        $this->error($key . " => " .$data['message']);
+      else {
+        $this->info($key . " => " .$data['message']);
+      }
+    }
+})->describe('Reindex algolia search with firebase data');
