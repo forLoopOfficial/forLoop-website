@@ -55,7 +55,7 @@
               </div>
           </div>
 
-          <p class="trademark"> © 2016 forLoop, Nigeria</p>
+          <p class="trademark"> © 2016 forLoop, Africa</p>
       </footer>
     </div>
 </template>

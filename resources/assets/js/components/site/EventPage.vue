@@ -154,9 +154,9 @@
           <div class="container">
               <div class="info__title text-center">{{ contentAttendees }}ATTENDING</div>
               <!-- Attendee list -->
-              <div v-for="attendee in event.attendees" class="info__list">
+              <div class="info__list">
                   <!-- Attendee list -->
-                  <div class="info__list__item">
+                  <div v-for="attendee in event.attendees" class="info__list__item">
                       <img :src="attendee.profile_image" alt="" class="img-circle img-block" height="90" width="90">
                   </div>
               </div>

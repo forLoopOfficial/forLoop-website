@@ -6,7 +6,7 @@
               <!-- Grid container -->
               <div class="outer-container">
                   <div class="hero__left">
-                      <h1 class="hero__title hero__title--1">Welcome to forloop, a growing community of Nigeria’s elite developers.</h1>
+                      <h1 class="hero__title hero__title--1">We’re a member-supported community of passionate software developers and enthusiasts across Africa who come together to share ideas and knowledge.</h1>
                   </div>
                   <div class="hero__right">
                       <!-- Text EDITOR -->
@@ -83,7 +83,7 @@
       <!-- Section -->
       <section class="reasons">
           <div class="container">
-              <h2 class="section__title">Why you should attent the next <br class="title-break"> forLoop meetup</h2>
+              <h2 class="section__title">You should join us at our next meet-up</h2>
               <!-- Grid container -->
               <div class="outer-container">
                   <!-- Reason item -->
@@ -94,8 +94,8 @@
                       <div class="reasons__item__icon">
                           <svg xmlns="http://www.w3.org/2000/svg" width="32px" height="46px" viewBox="0 0 32 46" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-620.000000, -711.000000)" fill="#F63BA8"><g transform="translate(480.000000, 692.000000)"><g transform="translate(139.000000, 19.000000)"><path d="M27.231 28.088C25.816 29.58 25.247 31.519 25.021 32.889L24.882 33.72 9.118 33.711 8.979 32.883C8.752 31.526 8.186 29.598 6.783 28.114L6.718 28.039C3.066 24.974 0.999 20.561 0.999 15.88 0.999 7.125 8.175 0.002 16.995 0.002 25.821 0.002 33.001 7.125 33.001 15.88 33.001 20.58 30.899 25.026 27.231 28.088L27.231 28.088ZM16.995 1.986C9.277 1.986 2.998 8.219 2.998 15.88 2.998 20.004 4.832 23.892 8.031 26.546 8.125 26.613 8.211 26.71 8.278 26.797 9.72 28.341 10.433 30.212 10.785 31.729L23.213 31.735C23.572 30.176 24.311 28.249 25.824 26.678L25.905 26.602C29.144 23.918 31.002 20.01 31.002 15.88 31.002 8.219 24.719 1.986 16.995 1.986L16.995 1.986ZM10.004 37.25L23.996 37.25C24.548 37.25 24.995 37.694 24.995 38.242 24.995 38.789 24.548 39.233 23.996 39.233L10.004 39.233C9.453 39.233 9.005 38.789 9.005 38.242 9.005 37.694 9.453 37.25 10.004 37.25L10.004 37.25ZM12.37 43.035L21.63 43.035C22.182 43.035 22.629 43.479 22.629 44.027 22.629 44.575 22.182 45.019 21.63 45.019L12.37 45.019C11.819 45.019 11.371 44.575 11.371 44.027 11.371 43.479 11.819 43.035 12.37 43.035L12.37 43.035Z"/></g></g></g></g></svg>
                       </div>
-                      <h3 class="reasons__item__title">Various Aspects</h3>
-                      <p class="reasons__item__content">If you’ve hung around kids at all in the last few years, you know they love YouTube, even though the video site is only supposed to be for people 13 and up. Now, Google is planning to roll out a YouTube app specifically aimed at kids.</p>
+                      <h3 class="reasons__item__title">Are you a tech professional?</h3>
+                      <p class="reasons__item__content">With a membership that boasts an interesting mix of professions, a forLoop meet up is a great place to do some networking.</p>
                   </div>
                   <!-- Reason item -->
                   <div class="reasons__item">
@@ -105,8 +105,8 @@
                       <div class="reasons__item__icon">
                           <svg xmlns="http://www.w3.org/2000/svg" width="32px" height="46px" viewBox="0 0 32 46" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-620.000000, -711.000000)" fill="#F63BA8"><g transform="translate(480.000000, 692.000000)"><g transform="translate(139.000000, 19.000000)"><path d="M27.231 28.088C25.816 29.58 25.247 31.519 25.021 32.889L24.882 33.72 9.118 33.711 8.979 32.883C8.752 31.526 8.186 29.598 6.783 28.114L6.718 28.039C3.066 24.974 0.999 20.561 0.999 15.88 0.999 7.125 8.175 0.002 16.995 0.002 25.821 0.002 33.001 7.125 33.001 15.88 33.001 20.58 30.899 25.026 27.231 28.088L27.231 28.088ZM16.995 1.986C9.277 1.986 2.998 8.219 2.998 15.88 2.998 20.004 4.832 23.892 8.031 26.546 8.125 26.613 8.211 26.71 8.278 26.797 9.72 28.341 10.433 30.212 10.785 31.729L23.213 31.735C23.572 30.176 24.311 28.249 25.824 26.678L25.905 26.602C29.144 23.918 31.002 20.01 31.002 15.88 31.002 8.219 24.719 1.986 16.995 1.986L16.995 1.986ZM10.004 37.25L23.996 37.25C24.548 37.25 24.995 37.694 24.995 38.242 24.995 38.789 24.548 39.233 23.996 39.233L10.004 39.233C9.453 39.233 9.005 38.789 9.005 38.242 9.005 37.694 9.453 37.25 10.004 37.25L10.004 37.25ZM12.37 43.035L21.63 43.035C22.182 43.035 22.629 43.479 22.629 44.027 22.629 44.575 22.182 45.019 21.63 45.019L12.37 45.019C11.819 45.019 11.371 44.575 11.371 44.027 11.371 43.479 11.819 43.035 12.37 43.035L12.37 43.035Z"/></g></g></g></g></svg>
                       </div>
-                      <h3 class="reasons__item__title">Making Project</h3>
-                      <p class="reasons__item__content">The State Department announced new policies Tuesday stipulating that U.S. drones can only be exported through government programs and that the receiving country needs to agree to certain conditions about what the drone will be used for.</p>
+                      <h3 class="reasons__item__title">Are you considering a career switch to tech?</h3>
+                      <p class="reasons__item__content">Considering the switch to a new career can be daunting but attending meet-ups like forLoop’s allows you to gently immerse yourself into your chosen career before making the big leap.</p>
                   </div>
                   <!-- Reason item -->
                   <div class="reasons__item">
@@ -116,8 +116,8 @@
                       <div class="reasons__item__icon">
                           <svg xmlns="http://www.w3.org/2000/svg" width="32px" height="46px" viewBox="0 0 32 46" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-620.000000, -711.000000)" fill="#F63BA8"><g transform="translate(480.000000, 692.000000)"><g transform="translate(139.000000, 19.000000)"><path d="M27.231 28.088C25.816 29.58 25.247 31.519 25.021 32.889L24.882 33.72 9.118 33.711 8.979 32.883C8.752 31.526 8.186 29.598 6.783 28.114L6.718 28.039C3.066 24.974 0.999 20.561 0.999 15.88 0.999 7.125 8.175 0.002 16.995 0.002 25.821 0.002 33.001 7.125 33.001 15.88 33.001 20.58 30.899 25.026 27.231 28.088L27.231 28.088ZM16.995 1.986C9.277 1.986 2.998 8.219 2.998 15.88 2.998 20.004 4.832 23.892 8.031 26.546 8.125 26.613 8.211 26.71 8.278 26.797 9.72 28.341 10.433 30.212 10.785 31.729L23.213 31.735C23.572 30.176 24.311 28.249 25.824 26.678L25.905 26.602C29.144 23.918 31.002 20.01 31.002 15.88 31.002 8.219 24.719 1.986 16.995 1.986L16.995 1.986ZM10.004 37.25L23.996 37.25C24.548 37.25 24.995 37.694 24.995 38.242 24.995 38.789 24.548 39.233 23.996 39.233L10.004 39.233C9.453 39.233 9.005 38.789 9.005 38.242 9.005 37.694 9.453 37.25 10.004 37.25L10.004 37.25ZM12.37 43.035L21.63 43.035C22.182 43.035 22.629 43.479 22.629 44.027 22.629 44.575 22.182 45.019 21.63 45.019L12.37 45.019C11.819 45.019 11.371 44.575 11.371 44.027 11.371 43.479 11.819 43.035 12.37 43.035L12.37 43.035Z"/></g></g></g></g></svg>
                       </div>
-                      <h3 class="reasons__item__title">Everything Else</h3>
-                      <p class="reasons__item__content">The State Department announced new policies Tuesday stipulating that U.S. drones can only be exported through government programs and that the receiving country needs to agree to certain conditions about what the drone will be used for.</p>
+                      <h3 class="reasons__item__title">Are you a student?</h3>
+                      <p class="reasons__item__content">We constantly have industry veterans and leaders come through to have talks and discussions in an informal setting and this always proves to be a great spot to meet mentors.</p>
                   </div>
               </div>
           </div>
