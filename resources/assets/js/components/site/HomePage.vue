@@ -6,7 +6,7 @@
               <!-- Grid container -->
               <div class="outer-container">
                   <div class="hero__left">
-                      <h1 class="hero__title hero__title--1">We’re a member-supported community of passionate software developers and enthusiasts across Africa who come together to share ideas and knowledge.</h1>
+                      <h1 class="hero__title hero__title--1">A community of passionate software developers and enthusiasts across Africa.</h1>
                   </div>
                   <div class="hero__right">
                       <!-- Text EDITOR -->
