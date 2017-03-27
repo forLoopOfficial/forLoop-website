@@ -49,10 +49,10 @@
                           <div class="members__name">{{member.displayName}}</div>
                           <div class="members__location">{{member.location}}</div>
                           <div class="members__social">
-                              <a :href="member.github_link" class="members__social__item" target="_blank">
+                              <a :href="parseLink(member.github_link, 'github.com')" class="members__social__item" target="_blank">
                                   <svg class="icon-social-github icon-md"><use xlink:href="img/icons.svg#icon-social-github"></use></svg>
                               </a>
-                              <a :href="member.twitter_link" class="members__social__item" target="_blank">
+                              <a :href="parseLink(member.twitter_link, 'twitter.com')" class="members__social__item" target="_blank">
                                   <svg class="icon-social-twitter icon-md"><use xlink:href="img/icons.svg#icon-social-twitter"></use></svg>
                               </a>
                           </div>
@@ -72,10 +72,10 @@
                           <div class="members__name">{{member.displayName}}</div>
                           <div class="members__location">{{member.location}}</div>
                           <div class="members__social">
-                              <a :href="member.github_link" class="members__social__item" target="_blank">
+                              <a :href="parseLink(member.github_link, 'github.com')" class="members__social__item" target="_blank">
                                   <svg class="icon-social-github icon-md"><use xlink:href="img/icons.svg#icon-social-github"></use></svg>
                               </a>
-                              <a :href="member.twitter_link" class="members__social__item" target="_blank">
+                              <a :href="parseLink(member.twitter_link, 'twitter.com')" class="members__social__item" target="_blank">
                                   <svg class="icon-social-twitter icon-md"><use xlink:href="img/icons.svg#icon-social-twitter"></use></svg>
                               </a>
                           </div>
@@ -136,6 +136,20 @@ export default {
   methods: {
     displaySkills (skills) {
       return skills.join(", ");
+    },
+    parseLink (token, type) {
+      if(token == undefined)
+        return;
+
+      let url = "";
+      if(token.indexOf(type) === 0 || token.indexOf('www') === 0){
+        url = `https://${token}`;
+      }else if(token.indexOf(type) === -1){
+        url = `https://${type}/${token}`;
+      }else{
+        url = token;
+      }
+      return url;
     },
     searchMembers: _.debounce(function(query) {
       this.membersSearch.search(query).then(results => {

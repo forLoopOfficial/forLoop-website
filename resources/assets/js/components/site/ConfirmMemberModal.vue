@@ -80,8 +80,24 @@ export default {
     confirmMember () {
 
     },
+    parseLink (token, type) {
+      if(token == undefined)
+        return;
+
+      let url = "";
+      if(token.indexOf(type) === 0 || token.indexOf('www') === 0){
+        url = `https://${token}`;
+      }else if(token.indexOf(type) === -1){
+        url = `https://${type}/${token}`;
+      }else{
+        url = token;
+      }
+      return url;
+    },
     save () {
       this.user.skills = this.user.skills.split(",");
+      this.user.github_link = this.parseLink(this.user.github_link, 'github.com');
+      this.user.twitter_link = this.parseLink(this.user.twitter_link, 'twitter.com');
       membersRef.child(this.user.uid).set(this.user);
       this.close();
     },
