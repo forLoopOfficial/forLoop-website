@@ -35,7 +35,7 @@
                                       <p class="meeting__item__date">{{ upcomingEvent.when.date | dateFormat }}</p>
                                   </div>
 
-                                  <div class="meeting__item__host">
+                                  <div v-if="upcomingEvent.hosts" class="meeting__item__host">
                                       <div class="meeting__item__host__avatar">
                                           <img :src="upcomingEvent.hosts[0].profile_image" alt="" class="img-circle inline-block" width="40" height="40">
                                       </div>
@@ -74,7 +74,7 @@
                                       <p class="meeting__item__date">{{ archivedEvent.when.date | dateFormat }}</p>
                                   </div>
 
-                                  <div class="meeting__item__host">
+                                  <div v-if="upcomingEvent.hosts" class="meeting__item__host">
                                       <div class="meeting__item__host__avatar">
                                           <img :src="archivedEvent.hosts[0].profile_image" alt="" class="img-circle inline-block" width="40" height="40">
                                       </div>

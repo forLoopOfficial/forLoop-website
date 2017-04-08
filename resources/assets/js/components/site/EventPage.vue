@@ -123,7 +123,7 @@
           <div class="container">
               <div class="info__title text-center">HOST</div>
               <!-- Host Information item -->
-              <div class="info__item">
+              <div v-if="event.hosts" class="info__item">
                   <div class="info__item__left">
                       <!-- Host Information user's avatar -->
                       <div class="info__item__avatar">

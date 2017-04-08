@@ -194,10 +194,14 @@ export default {
       }
     },
     addSpeaker (contributor) {
-      this.event.speakers.push(contributor);
+      let speakers = this.event.speakers || [];
+      speakers.push(contributor)
+      this.event.speakers = speakers;
     },
     addHost (contributor) {
-      this.event.hosts.push(contributor);
+      let hosts = this.event.hosts || [];
+      hosts.push(contributor);
+      this.event.hosts = hosts;
     },
     removeHost (index) {
       this.event.hosts.splice(index, 1);
