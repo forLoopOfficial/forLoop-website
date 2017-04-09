@@ -101,7 +101,7 @@ export default {
       return url;
     },
     save () {
-      this.user.skills = this.user.skills.split(",");
+      // this.user.skills = this.skills.split(",");
       this.user.github_link = this.parseLink(this.user.github_link, 'github.com');
       this.user.twitter_link = this.parseLink(this.user.twitter_link, 'twitter.com');
       membersRef.child(this.user.uid).set(this.user);
@@ -112,11 +112,16 @@ export default {
     }
   },
   computed: {
-    skills () {
-      if(!this.user.skills)
-        return "";
+    skills: {
+      get () {
+        if(!this.user.skills)
+          return "";
 
-      return this.user.skills.join(",");
+        return this.user.skills.join(",");
+      },
+      set (skills) {
+        this.user.skills = skills.split(",");
+      }
     }
   }
 }

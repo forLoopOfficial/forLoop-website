@@ -168,7 +168,6 @@ export default {
         let photoUrl = result.user.photoURL.replace(/_normal/, "")
         this.member = {
             photoUrl: photoUrl,
-            email: result.user.email,
             displayName: result.user.displayName,
             uid: result.user.uid
         };
