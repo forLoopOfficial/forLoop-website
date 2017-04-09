@@ -168,6 +168,26 @@
       </section>
 
       <g-map :location="event.location"></g-map>
+      <!-- Modal content -->
+      <b-modal :closeOnBackdrop='false' id="confirmModal">
+        <div slot="modal-header">
+          <h4 class="modal-title" id="myModalLabel" style="text-align:center">Confirm Attendance</h4>
+        </div>
+        <div slot="modal-body">
+          <form @submit.prevent="confirmAttendance" class="form-horizontal form-label-left">
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input v-model="email" type="text" class="form-control" placeholder="Email" required>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div slot="modal-footer">
+          <button @click="confirmAttendance" type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </b-modal>
+      <!-- Modal content -->
     </div>
 </template>
 
@@ -223,6 +243,9 @@ export default {
   data () {
     return {
       isAttendant: false,
+      showConfirmModal: false,
+      user: {},
+      email: "",
       event: null
     }
   },
@@ -236,14 +259,20 @@ export default {
       provider.setCustomParameters({'screen_name':'forLoopNigeria'});
       firebase.auth().signInWithPopup(provider).then((result) =>{
         var user = result.user;
-        this.addAttendee(user);
+        this.user = user;
+        this.$root.$emit('show::modal', 'confirmModal');
       }).catch(function(error) {
         console.log(error);
         alert(`Please try again: ${error.message}`);
       });
     },
 
-    addAttendee (user) {
+    confirmAttendance () {
+      this.addAttendee();
+    },
+
+    addAttendee () {
+      let user = this.user;
       let uid     = user.uid;
       //check if the user is already attending
       if(!this.event.attendees || Object.keys(this.event.attendees).indexOf(uid) === -1){
@@ -253,11 +282,13 @@ export default {
           name: user.displayName,
           profile_image: user.photoURL,
           uid: uid,
-          email: user.email
+          email: this.email
         }
         attendeesRef.set(attendee);
       }
       this.isAttendant = true;
+      this.email = "";
+      this.$root.$emit('hide::modal', 'confirmModal');
     }
   },
 
