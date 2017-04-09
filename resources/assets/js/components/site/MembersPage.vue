@@ -172,6 +172,11 @@ export default {
             displayName: result.user.displayName,
             uid: result.user.uid
         };
+
+        let details = this.membersPage.members[this.member.uid]; //get existing member detail if it exist
+        if(details)
+          this.member = Object.assign({}, details, this.member);
+
         this.showConfirmDialog();
       }).catch(function(error) {
         console.log(error);

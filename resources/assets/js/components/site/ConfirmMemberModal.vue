@@ -40,7 +40,7 @@
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12">Skills</label>
           <div class="col-md-9 col-sm-9 col-xs-12">
-            <input v-model="user.skills" type="text" class="form-control" placeholder="Comma separated list of skills">
+            <input v-model="skills" type="text" class="form-control" placeholder="Comma separated list of skills">
           </div>
         </div>
         <div class="form-group">
@@ -109,6 +109,14 @@ export default {
     },
     close () {
       this.$children[0].hide();
+    }
+  },
+  computed: {
+    skills () {
+      if(!this.user.skills)
+        return "";
+
+      return this.user.skills.join(",");
     }
   }
 }
