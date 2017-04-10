@@ -18,3 +18,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('/twitterprofile/{handle}', 'ApiController@index');
+
+Route::post('/subscribe', 'ApiController@subscribe');

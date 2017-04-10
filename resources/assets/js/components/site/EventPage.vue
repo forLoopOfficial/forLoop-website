@@ -280,11 +280,22 @@ export default {
         let attendeesRef = db.ref(refLink);
         let attendee = {
           name: user.displayName,
-          profile_image: user.photoURL,
+          profile_image: user.photoURL.replace(/_normal/, ""),
           uid: uid,
           email: this.email
         }
         attendeesRef.set(attendee);
+
+        //Subscribe User mail
+        let formData = new FormData();
+        formData.append('email', this.email);
+        let url = `/api/subscribe`;
+        this.$http.post(url, formData).then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
       }
       this.isAttendant = true;
       this.email = "";

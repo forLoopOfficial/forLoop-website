@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 use App\Services\AlgoliaSyncService;
+use App\Services\MailChimpSyncService;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,14 @@ Artisan::command('reindex', function () {
       }
     }
 })->describe('Reindex algolia search with firebase data');
+
+Artisan::command('sync-mail', function () {
+    $output = MailChimpSyncService::sync();
+    foreach($output as $key => $data){
+      if($data['status'] == "failed")
+        $this->error($key . " => " .$data['message']);
+      else {
+        $this->info($key . " => " .$data['message']);
+      }
+    }
+})->describe('Sync MailChimp subscriber list with firebase data');

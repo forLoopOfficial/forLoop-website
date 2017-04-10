@@ -41,7 +41,29 @@ export default {
   },
   methods: {
     addSubscriber (e) {
-      subscribersRef.push(this.subscriber);
+      subscribersRef.push(this.subscriber)
+        .then((snapshot) => {
+          let formData = new FormData();
+          formData.append('email', this.subscriber);
+          let url = `/api/subscribe`;
+          this.$http.post(
+            url,
+            formData, 
+            {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
+            }
+          ).then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+        })
+        .catch((err) => {
+
+        });
       this.hasSubscribed = true;
     }
   }

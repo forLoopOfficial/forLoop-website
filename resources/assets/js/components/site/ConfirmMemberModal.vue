@@ -104,7 +104,21 @@ export default {
       // this.user.skills = this.skills.split(",");
       this.user.github_link = this.parseLink(this.user.github_link, 'github.com');
       this.user.twitter_link = this.parseLink(this.user.twitter_link, 'twitter.com');
-      membersRef.child(this.user.uid).set(this.user);
+      membersRef.child(this.user.uid)
+        .set(this.user)
+        .then(() => {
+          if(this.user.email){
+            let formData = new FormData();
+            formData.append('email', this.user.email);
+            let url = `/api/subscribe`;
+            this.$http.post(url, formData).then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+          }
+        });
       this.close();
     },
     close () {
