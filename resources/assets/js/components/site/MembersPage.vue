@@ -135,7 +135,9 @@ export default {
   },
   methods: {
     displaySkills (skills) {
-      return skills.join(", ");
+      if(skills)
+        return skills.join(", ");
+      return "";
     },
     parseLink (token, type) {
       if(token == undefined)
