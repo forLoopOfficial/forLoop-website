@@ -43,6 +43,12 @@
 <script>
 import firebase from 'firebase';
 export default {
+  name: 'Login',
+  //lifecycle methods
+  created () {
+    firebase.auth().signOut();
+  },
+
   data () {
     return {
       email: '',
@@ -53,13 +59,16 @@ export default {
     signInWithPassword () {
       return firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then((userData) => {
-          console.log(userData)
           this.onSignedIn()
           return userData
         })
-        .catch((error) => console.log(error)) // tell the user an error occurred
+        .catch((error) => {
+          console.log(error)
+          alert(error.message);
+        }) // tell the user an error occurred
     },
     onSignedIn () {
+      console.log('going home');
       this.$router.push({path: '/'})
     }
   }

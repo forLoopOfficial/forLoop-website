@@ -6,7 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*"
+        "laravel/framework": "5.3.*",
+        "abraham/twitteroauth": "^0.7.2",
+        "algolia/algoliasearch-client-php": "^1.15",
+        "guzzlehttp/guzzle": "~6.0",
+        "drewm/mailchimp-api": "^2.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

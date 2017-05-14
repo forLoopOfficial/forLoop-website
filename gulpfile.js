@@ -16,11 +16,18 @@ require('laravel-elixir-vue-2');
 
 elixir(mix => {
     mix.sass('app.scss')
+       .styles([
+         "./node_modules/slick-carousel/slick/slick.css",
+         "./node_modules/slick-carousel/slick/slick-theme.css",
+         "./node_modules/animate.css/animate.min.css"
+       ], 'public/css/app-all.css')
        .scripts([
+           './node_modules/jquery/dist/jquery.min.js',
            'bootstrap-tab.js',
            'ie10-viewport-bug-workaround.js',
            'custom.js'
-         ]);
+         ])
+       .webpack('app.js');
 
     //admin static resources
     mix.sass('custom.scss', 'public/css/admin-app.css')
@@ -29,17 +36,19 @@ elixir(mix => {
         .styles([
           "./node_modules/bootstrap/dist/css/bootstrap.min.css",
           "./node_modules/font-awesome/css/font-awesome.min.css",
-          "./node_modules/nprogress/nprogress.css"
+          "./node_modules/datatables.net-bs/css/dataTables.bootstrap.css"
         ], 'public/css/admin-all.css')
         .copy('node_modules/font-awesome/fonts', 'public/fonts')
+        .copy('node_modules/bootstrap/dist/fonts', 'public/fonts')
         .scripts([
           "smartresize.js",
           "admin-custom.js"
         ], 'public/js/admin-custom.js')
         .scripts([
-          "./node_modules/jquery/dist/jquery.js",
+          "./node_modules/jquery/dist/jquery.min.js",
           "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-          "./node_modules/fastclick/lib/fastclick.js",
-          "./node_modules/nprogress/nprogress.js"
+          "./node_modules/datatables.net/js/jquery.dataTables.js",
+          "./node_modules/datatables.net-bs/js/dataTables.bootstrap.js",
+          "./node_modules/fastclick/lib/fastclick.js"
         ], 'public/js/admin-all.js');
 });

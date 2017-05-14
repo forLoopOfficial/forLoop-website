@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
+use App\Services\AlgoliaSyncService;
+use App\Services\MailChimpSyncService;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,25 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('reindex', function () {
+    $output = AlgoliaSyncService::sync();
+    foreach($output as $key => $data){
+      if($data['status'] == "failed")
+        $this->error($key . " => " .$data['message']);
+      else {
+        $this->info($key . " => " .$data['message']);
+      }
+    }
+})->describe('Reindex algolia search with firebase data');
+
+Artisan::command('sync-mail', function () {
+    $output = MailChimpSyncService::sync();
+    foreach($output as $key => $data){
+      if($data['status'] == "failed")
+        $this->error($key . " => " .$data['message']);
+      else {
+        $this->info($key . " => " .$data['message']);
+      }
+    }
+})->describe('Sync MailChimp subscriber list with firebase data');

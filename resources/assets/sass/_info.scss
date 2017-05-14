@@ -314,9 +314,11 @@
 .images__section__left {
     @include span-columns(6);
     height: 424px;
+    margin-right: 0.0576520234%;
     @include media(768px) {
         @include span-columns(3);
         height: 424px;
+        margin-right: 0.0576520234%;
     }
 }
 

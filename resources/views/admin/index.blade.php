@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> forLoop Admin </title>
 
     <!-- Custom Theme Style -->
@@ -21,16 +21,9 @@
 
     </div>
     <!-- Page content -->
-
-
-    <!-- footer content -->
-    <footer>
-      <div class="pull-right">
-        Powered by <a href="https://colorlib.com">Colorlib</a>
-      </div>
-      <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
+    <script>
+      window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
+    </script>
     <!-- All vender Scripts -->
     <script src="/js/admin-all.js"></script>
 
@@ -39,5 +32,12 @@
 
     <!-- App Scripts -->
     <script src="/js/admin-main.js"></script>
+
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcjFtRHmXguek060FhPql3KH_--AXoEjs&callback=initMap">
+    </script>
+    <script>
+      function initMap(){ console.log("Map Loaded");}
+    </script>
   </body>
 </html>

@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+Route::get('/twitterprofile/{handle}', 'ApiController@index');
+
+Route::post('/subscribe', 'ApiController@subscribe');

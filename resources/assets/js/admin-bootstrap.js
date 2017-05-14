@@ -1,13 +1,29 @@
 
 window._ = require('lodash');
+require('datejs');
 // Initialize Firebase
-const config = {
-  apiKey: "AIzaSyAcjFtRHmXguek060FhPql3KH_--AXoEjs",
-  authDomain: "forloop-74a2a.firebaseapp.com",
-  databaseURL: "https://forloop-74a2a.firebaseio.com",
-  storageBucket: "forloop-74a2a.appspot.com",
-  messagingSenderId: "296148842604"
-};
+let config;
+if(process.env.NODE_ENV !== 'production') {
+  console.log(process.env);
+  config = {
+    apiKey: "AIzaSyAcjFtRHmXguek060FhPql3KH_--AXoEjs",
+    authDomain: "forloop-74a2a.firebaseapp.com",
+    databaseURL: "https://forloop-74a2a.firebaseio.com",
+    storageBucket: "forloop-74a2a.appspot.com",
+    messagingSenderId: "296148842604"
+  };
+
+}else {
+  console.log(process.env);
+  config = {
+    apiKey: "AIzaSyCK_-UkPvs-xjqMriFfntP6xLrCDS3sUqw",
+    authDomain: "forloop-be249.firebaseapp.com",
+    databaseURL: "https://forloop-be249.firebaseio.com",
+    storageBucket: "forloop-be249.appspot.com",
+    messagingSenderId: "332051163114"
+  };
+}
+
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
@@ -15,41 +31,49 @@ const config = {
  */
 
 window.Vue = require('vue');
-const vueResource = require('vue-resource');
-const vueRouter   = require('vue-router');
-const vueFire     = require('vuefire');
-const firebase    = require('firebase');
-window.firebase   = firebase;
+const vueResource   = require('vue-resource');
+const vueRouter     = require('vue-router');
+const vueFire       = require('vuefire');
+const firebase      = require('firebase');
+const bootstrapVue  = require('bootstrap-vue');
+window.firebase     = firebase;
 Vue.use(vueResource);
 Vue.use(vueRouter);
 Vue.use(vueFire);
 
 
 firebase.initializeApp(config);
-// firebase.auth().onAuthStateChanged(user => {
-//   if(user){
-//
-//   }else{
-//     router.push({path: 'login'})
-//   }
-// });
+firebase.initializeApp(config, 'AdminCreateApp');
 
-const authState = new Promise((resolve, reject) => {
-  firebase.auth().onAuthStateChanged(user => {
-    if(user){
-      resolve(user);
-    }else{
-      reject(new Error("No User"));
-    }
+const authState = function () {
+  return new Promise((resolve, reject) => {
+          firebase.auth().onAuthStateChanged(user => {
+            if(user && user.email){
+              resolve(user);
+            }else{
+              reject(new Error("No User"));
+            }
+          });
   });
-});
+}
 
-const App       = require('./components/App.vue');
-const AdminArea = require('./components/AdminArea.vue');
-const Dashboard = require('./components/Dashboard.vue');
-const Sponsors  = require('./components/Sponsors.vue');
-const Events    = require('./components/Events.vue');
-const Login     = require('./components/Login.vue');
+const App           = require('./components/AdminApp.vue');
+const AdminArea     = require('./components/admin/AdminArea.vue');
+const Dashboard     = require('./components/admin/Dashboard.vue');
+const Subscribers   = require('./components/admin/Subscribers.vue');
+const ManageUsers   = require('./components/admin/users/ManageUsers.vue');
+const UserProfile   = require('./components/admin/users/Profile.vue');
+const ViewUsers     = require('./components/admin/users/ViewUsers.vue');
+const Sponsors      = require('./components/admin/sponsors/Sponsors.vue');
+const ManageEvents  = require('./components/admin/events/ManageEvents.vue');
+const CreateEvent   = require('./components/admin/events/CreateEvent.vue');
+const EventDetails  = require('./components/admin/events/EventDetails.vue');
+const Events        = require('./components/admin/events/Events.vue');
+const ManagePages   = require('./components/admin/pages/ManagePages.vue');
+const AboutPage     = require('./components/admin/pages/About.vue');
+const MembersPage   = require('./components/admin/pages/Members.vue');
+const TeamPage      = require('./components/admin/pages/Team.vue');
+const Login         = require('./components/admin/Login.vue');
 
 //Define admin application routes
 const routes = [
@@ -59,10 +83,39 @@ const routes = [
         path: 'login', component: Login
       },
       {
-        path: 'events', component: Events,
+        path: 'dashboard', component: Dashboard,
         meta: {
           requiresAuth: true
         }
+      },
+      {
+        path: 'subscribers', component: Subscribers,
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'events', component: ManageEvents,
+        children: [
+          {
+            path: 'create', component: CreateEvent,
+            meta: {
+              requiresAuth: true
+            }
+          },
+          {
+            path: 'edit/:slug', component: EventDetails,
+            meta: {
+              requiresAuth: true
+            }
+          },
+          {
+            path: '', component: Events,
+            meta: {
+              requiresAuth: true
+            }
+          }
+        ]
       },
       {
         path: 'sponsors', component: Sponsors,
@@ -71,22 +124,22 @@ const routes = [
         }
       },
       {
-        path: 'pages', component: Dashboard,
+        path: 'pages', component: ManagePages,
         children: [
           {
-            path: 'about', component: Dashboard,
+            path: 'about', component: AboutPage,
             meta: {
               requiresAuth: true
             }
           },
           {
-            path: 'team', component: Dashboard,
+            path: 'team', component: TeamPage,
             meta: {
               requiresAuth: true
             }
           },
           {
-            path: 'members', component: Dashboard,
+            path: 'members', component: MembersPage,
             meta: {
               requiresAuth: true
             }
@@ -94,10 +147,19 @@ const routes = [
         ]
       },
       {
-        path: '', component: Dashboard,
-        meta: {
-          requiresAuth: true
-        }
+        path: 'users', component: ManageUsers,
+        children: [
+          {
+            path: 'manage', component: ViewUsers,
+            meta: {
+              requiresAuth: true,
+              requiresRoles: ['superadmin']
+            }
+          }
+        ]
+      },
+      {
+        path: '', redirect: 'dashboard'
       }
     ]
   }
@@ -109,11 +171,11 @@ const router = new vueRouter({
   routes
 });
 router.beforeEach((to, from, next) => {
-  console.log(to, from);
+
   if(!to.meta.requiresAuth){
-    next();
+    next()
   }
-  authState.then((user) => next(), (error) => next({path: '/login'}))
+  authState().then(user => next(), () => next({path: '/login'}));
 });
 
 new Vue({

@@ -11,16 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 
-Route::get('/about', 'AboutController@index');
-Route::get('/team', 'HomeController@team');
-Route::get('/members', 'HomeController@members');
-Route::get('/event', 'HomeController@events');
-Route::get('/home', 'HomeController@home');
-Route::get('/meetups', 'HomeController@meetup');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
@@ -29,6 +20,25 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     })->where('any', '.*');
 });
 
+
+Route::group(['prefix' => ''], function() {
+
+    Route::get('{any?}', function($any = null) {
+      return view('index');
+    })->where('any', '.*');
+});
+
+
+    // Route::get('/', function () {
+    //     return view('index');
+    // });
+    //
+    // Route::get('/about', 'AboutController@index');
+    // Route::get('/team', 'HomeController@team');
+    // Route::get('/members', 'HomeController@members');
+    // Route::get('/event', 'HomeController@events');
+    // Route::get('/home', 'HomeController@home');
+    // Route::get('/meetups', 'HomeController@meetup');
 
     // Route::get('/', 'DashboardController@index');
     //

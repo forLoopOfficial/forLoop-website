@@ -1,20 +1,22 @@
 <template>
-
-  <div class="container body">
-    <div class="main_container">
-      <router-view></router-view>
-    </div>
-    </div>
+  <div>
+    <app-bar></app-bar>
+    <router-view></router-view>
+    <app-footer></app-footer>
+  </div>
 </template>
 
 
 <script>
+import AppBar from './site/AppBar.vue';
+import AppFooter from './site/AppFooter.vue';
 
 export default {
-  data () {
-    return {
-      notes: []
-    }
+  name: 'App',
+
+  components: {
+    AppBar,
+    AppFooter
   }
 }
 
