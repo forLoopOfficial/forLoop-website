@@ -4,6 +4,9 @@ env = '"'+env+'"'; //dont know why yet
 
 module.exports = {
   //No longer needed
+  output: {
+    publicPath: '/js/'
+  },
   resolve: {
     extensions: ['.js', '.vue', '.css', '.json'],
   },

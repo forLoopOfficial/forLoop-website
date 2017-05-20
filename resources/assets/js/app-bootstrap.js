@@ -1,5 +1,5 @@
 
-window._ = require('lodash');
+// window._ = require('lodash');
 require('datejs');
 // Initialize Firebase
 let config;
@@ -47,12 +47,36 @@ window.algoliaClient = algoliaClient;
 firebase.initializeApp(config);
 
 const App           = require('./components/App.vue');
-const HomePage      = require('./components/site/HomePage.vue');
-const AboutPage     = require('./components/site/AboutPage.vue');
-const MembersPage   = require('./components/site/MembersPage.vue');
-const TeamPage      = require('./components/site/TeamPage.vue');
-const EventPage     = require('./components/site/EventPage.vue');
-const MeetupsPage   = require('./components/site/MeetupsPage.vue');
+const HomePage      = (resolve, reject) => {
+  require.ensure(['./components/site/HomePage.vue'], () => {
+    resolve(require('./components/site/HomePage.vue'));
+  });
+};
+const AboutPage     = (resolve, reject) => {
+  require.ensure(['./components/site/AboutPage.vue'], () => {
+    resolve(require('./components/site/AboutPage.vue'));
+  });
+};
+const MembersPage   = (resolve, reject) => {
+  require.ensure(['./components/site/MembersPage.vue'], () => {
+    resolve(require('./components/site/MembersPage.vue'));
+  });
+};
+const TeamPage      = (resolve, reject) => {
+  require.ensure(['./components/site/TeamPage.vue'], () => {
+    resolve(require('./components/site/TeamPage.vue'));
+  });
+};
+const EventPage     = (resolve, reject) => {
+  require.ensure(['./components/site/EventPage.vue'], () => {
+    resolve(require('./components/site/EventPage.vue'));
+  });
+};
+const MeetupsPage   = (resolve, reject) => {
+  require.ensure(['./components/site/MeetupsPage.vue'], () => {
+    resolve(require('./components/site/MeetupsPage.vue'));
+  });
+};
 
 //Define admin application routes
 const routes = [
