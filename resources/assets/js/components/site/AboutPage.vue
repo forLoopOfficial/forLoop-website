@@ -59,7 +59,7 @@ export default {
         speed: 300,
         centerMode: true,
         autoplay: true,
-        autoplaySpeed: 1000
+        autoplaySpeed: 3000
       },
     }
   },

@@ -146,34 +146,6 @@
                           </a>
                       </div>
                   </div>
-
-                  <div class="sponsors__list__row sponsors__list__row--2" style="display:none">
-                      <div class="sponsors__list__item">
-                          <a href="" class="sponsors__list__link sponsors__list__link--idea  ">
-                              <img src="img/idea.png" alt="" class="sponsors-image__responsive">
-                          </a>
-                      </div>
-                      <div class="sponsors__list__item">
-                          <a href="" class="sponsors__list__link sponsors__list__link--enspire  ">
-                              <img src="img/enspire.png" alt="" class="sponsors-image__responsive">
-                          </a>
-                      </div>
-                      <div class="sponsors__list__item">
-                          <a href="" class="sponsors__list__link sponsors__list__link--chowhub  ">
-                              <img src="img/chowhub.png" alt="" class="sponsors-image__responsive">
-                          </a>
-                      </div>
-                      <div class="sponsors__list__item">
-                          <a href="" class="sponsors__list__link sponsors__list__link--projaro  ">
-                              <img src="img/projaro.png" alt="" class="sponsors-image__responsive">
-                          </a>
-                      </div>
-                      <div class="sponsors__list__item">
-                          <a href="" class="sponsors__list__link sponsors__list__link--hotelsng  ">
-                              <img src="img/hotelsng.png" alt="" class="sponsors-image__responsive">
-                          </a>
-                      </div>
-                  </div>
               </div>
           </div>
       </section>
