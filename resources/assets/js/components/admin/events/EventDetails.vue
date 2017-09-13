@@ -90,7 +90,7 @@
                     </div>
                   </div>
                   <add-contributor @add="addSpeaker"></add-contributor>
-                  <h3 class="text-center">Host</h3>
+                  <h3 class="text-center">Hosts</h3>
                   <div v-for="(host, index) in event.hosts" class="host_content" :key="host.screen_name">
                     <div class="icon">
                       <img :src="host.profile_image" width="48" height="48">
@@ -103,6 +103,22 @@
                     </div>
                   </div>
                   <add-contributor @add="addHost"></add-contributor>
+                  <h3 class="text-center">Sponsors</h3>
+                  <div v-for="(sponsor, index) in event.sponsors" class="host_content" :key="index">
+                    <div class="icon">
+                      <img :src="sponsor.image" width="48" height="48">
+                    </div>
+                    <div class="inner">
+                      <button @click="removeSponsor(index)" class="btn btn-xs btn-danger">X</button>
+                      <textarea v-model="sponsor.image" placeholder="Image Url">
+
+                      </textarea>
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <input v-model="imageLink" class="twitter_input" placeholder="Image Url" type="text">
+                    <button @click="addSponsor" class="btn btn-xs btn-primary">Add</button>
+                  </div>
                 </div>
                 <div class="form-group">
                   <button @click="updateEvent" :disabled="updating" class="btn btn-primary" type="button" name="button">Update</button>
@@ -165,6 +181,7 @@ export default {
     return {
       tempResource: "",
       tempBackground: "",
+      imageLink: null,
       updating: false,
       event: null
     }
@@ -211,13 +228,27 @@ export default {
       hosts.push(contributor);
       this.event.hosts = hosts;
     },
+    addSponsor () {
+      if(!this.imageLink)
+        return;
+
+      const sponsor = {
+        image: this.imageLink
+      }
+      let sponsors = this.event.sponsors || [];
+      sponsors.push(sponsor);
+      this.event.sponsors = sponsors;
+    },
     removeHost (index) {
       this.event.hosts.splice(index, 1);
     },
-
     removeSpeaker (index) {
       this.event.speakers.splice(index, 1);
     },
+    removeSponsor (index) {
+      this.event.sponsors.splice(index, 1);
+    },
+
     changeResource (e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length)

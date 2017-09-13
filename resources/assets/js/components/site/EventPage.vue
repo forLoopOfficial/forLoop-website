@@ -78,7 +78,20 @@
               <p class="section__caption">{{ event.description }}</p>
           </div>
       </section>
-
+    
+      <!-- Sponsors Information -->
+      <section class="info info--2" v-if="event.sponsors">
+          <div class="container">
+              <div class="info__title text-center">Sponsor(s)</div>
+              <!-- Attendee list -->
+              <div class="info__list">
+                  <!-- Attendee list -->
+                  <div v-for="(sponsor, index) in event.sponsors" class="info__list__item" :key="index">
+                      <img :src="sponsor.image" alt="" class="img-circle img-block" height="150" width="200">
+                  </div>
+              </div>
+          </div>
+      </section>
 
       <!-- that line -->
       <div class="line">
