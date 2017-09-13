@@ -43,11 +43,12 @@ Vue.use(vueFire);
 
 
 firebase.initializeApp(config);
+firebase.initializeApp(config, 'AdminApp');
 firebase.initializeApp(config, 'AdminCreateApp');
 
 const authState = function () {
   return new Promise((resolve, reject) => {
-          firebase.auth().onAuthStateChanged(user => {
+          firebase.app('AdminApp').auth().onAuthStateChanged(user => {
             if(user && user.email){
               resolve(user);
             }else{

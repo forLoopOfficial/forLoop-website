@@ -25,9 +25,9 @@ export default {
   name: 'AdminArea',
   //lifecycle methods
   created () {
-    let user = firebase.auth().currentUser;
+    let user = firebase.app('AdminApp').auth().currentUser;
     this.setUserData(user);
-    firebase.auth().onAuthStateChanged(function( user ) {
+    firebase.app('AdminApp').auth().onAuthStateChanged(function( user ) {
       this.setUserData(user);
       this.mergeUserData();
     }.bind(this));

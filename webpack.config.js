@@ -17,5 +17,13 @@ module.exports = {
         NODE_ENV: env
       }
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
+    ]
+  }
 }
