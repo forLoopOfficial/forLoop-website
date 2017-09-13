@@ -87,7 +87,7 @@
               <div class="info__list">
                   <!-- Attendee list -->
                   <div v-for="(sponsor, index) in event.sponsors" class="info__list__item" :key="index">
-                      <img :src="sponsor.image" alt="" class="img img-block" height="150" width="200">
+                      <img :src="sponsor.image" alt="" class="img img-block" height="150">
                   </div>
               </div>
           </div>
@@ -357,5 +357,7 @@ function getEvent (slug) {
 </script>
 
 <style>
-
+.info__list{
+    justify-content: center;
+}
 </style>
