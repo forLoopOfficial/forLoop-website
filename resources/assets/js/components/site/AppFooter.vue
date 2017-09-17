@@ -50,12 +50,12 @@
                   <div class="footer-social__content__placeholder">
                       <a href="https://twitter.com/forloopnigeria" class="footer-links">Twitter</a>
                       <a href="" class="footer-links">Facebook</a>
-                      <a href="" class="footer-links">Github</a>
+                      <a href="https://github.com/forLoopOfficial" class="footer-links">Github</a>
                   </div>
               </div>
           </div>
 
-          <p class="trademark"> © 2016 forLoop, Africa</p>
+          <p class="trademark"> © 2017 forLoop, Africa</p>
       </footer>
     </div>
 </template>
