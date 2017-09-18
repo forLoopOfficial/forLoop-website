@@ -28,6 +28,15 @@
 
         </div>
         <!-- Page content -->
+        <!-- Begin SessionStack code -->
+          <script type="text/javascript">
+          !function(a,b){var c=window;c.SessionStack=a,c[a]=c[a]||function(){
+          c[a].q=c[a].q||[],c[a].q.push(arguments)},c[a].t=b;var d=document.createElement("script");
+          d.async=1,d.src="https://cdn.sessionstack.com/sessionstack.js";
+          var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(d,e);
+          }("sessionstack",'{{env("SESSIONSTACK_KEY")}}');
+        </script>
+        <!-- End SessionStack Code -->
         <script>
           var _rollbarConfig = {
               accessToken: '{{env("ROLLBAR_CLIENT_KEY")}}',
