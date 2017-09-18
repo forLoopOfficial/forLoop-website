@@ -67,10 +67,17 @@
                     <input @change="changeResource" id='fopen' type='file' accept="application/zip,application/x-zip,application/x-zip-compressed"/>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Change Background </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input @change="changeBackground" style="display:none" id='fopenImage' type='file' accept="image/jpeg,image/x-png,.png"/>
+                    <button @click="openFileDialog" class="btn btn-primary" type="button" name="button">Change Background</button>
+                  </div>
+                </div>
 
                 <div class="event_contributors_content">
                   <h3 class="text-center">Speakers</h3>
-                  <div v-for="(speaker, index) in event.speakers" class="speaker_content">
+                  <div v-for="(speaker, index) in event.speakers" class="speaker_content" :key="speaker.screen_name">
                     <div class="icon">
                       <img :src="speaker.profile_image" width="48" height="48">
                     </div>
@@ -83,8 +90,8 @@
                     </div>
                   </div>
                   <add-contributor @add="addSpeaker"></add-contributor>
-                  <h3 class="text-center">Host</h3>
-                  <div v-for="(host, index) in event.hosts" class="host_content">
+                  <h3 class="text-center">Hosts</h3>
+                  <div v-for="(host, index) in event.hosts" class="host_content" :key="host.screen_name">
                     <div class="icon">
                       <img :src="host.profile_image" width="48" height="48">
                     </div>
@@ -96,6 +103,22 @@
                     </div>
                   </div>
                   <add-contributor @add="addHost"></add-contributor>
+                  <h3 class="text-center">Sponsors</h3>
+                  <div v-for="(sponsor, index) in event.sponsors" class="host_content" :key="index">
+                    <div class="icon">
+                      <img :src="sponsor.image" width="48" height="48">
+                    </div>
+                    <div class="inner">
+                      <button @click="removeSponsor(index)" class="btn btn-xs btn-danger">X</button>
+                      <textarea v-model="sponsor.image" placeholder="Image Url">
+
+                      </textarea>
+                    </div>
+                  </div>
+                  <div class="inner">
+                    <input v-model="imageLink" class="twitter_input" placeholder="Image Url" type="text">
+                    <button @click="addSponsor" class="btn btn-xs btn-primary">Add</button>
+                  </div>
                 </div>
                 <div class="form-group">
                   <button @click="updateEvent" :disabled="updating" class="btn btn-primary" type="button" name="button">Update</button>
@@ -119,7 +142,7 @@ import Datepicker     from 'vuejs-datepicker';
 import AddContributor from './AddContributor.vue';
 
 const db = firebase.database();
-const resourceStorage = firebase.storage().ref('events');
+const resourceStorage = firebase.storage().ref('events'); 
 export default {
   name: 'EventDetails',
   //lifecycle methods
@@ -157,6 +180,8 @@ export default {
   data () {
     return {
       tempResource: "",
+      tempBackground: "",
+      imageLink: null,
       updating: false,
       event: null
     }
@@ -203,13 +228,27 @@ export default {
       hosts.push(contributor);
       this.event.hosts = hosts;
     },
+    addSponsor () {
+      if(!this.imageLink)
+        return;
+
+      const sponsor = {
+        image: this.imageLink
+      }
+      let sponsors = this.event.sponsors || [];
+      sponsors.push(sponsor);
+      this.event.sponsors = sponsors;
+    },
     removeHost (index) {
       this.event.hosts.splice(index, 1);
     },
-
     removeSpeaker (index) {
       this.event.speakers.splice(index, 1);
     },
+    removeSponsor (index) {
+      this.event.sponsors.splice(index, 1);
+    },
+
     changeResource (e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length)
@@ -223,11 +262,27 @@ export default {
     },
     updateEventPhase2 () {
       let eventsRef = db.ref(`events/${this.event.id}`);
-      if(this.tempResource != ""){
-        let resourceName = `${new Date().getTime()}_${this.tempResource.name}`;
-        let eventResRef  = resourceStorage.child(`${this.event.id}/resources/${resourceName}`);
-        eventResRef.put(this.tempResource).then((snapshot) => {
-          this.event.resourceUrl = snapshot.downloadURL;
+      if(this.tempResource !== "" || this.tempBackground !== "" ){
+        let updates = [];
+        if(this.tempResource !== "") {
+          let resourceName = `${new Date().getTime()}_${this.tempResource.name}`;
+          let eventResRef  = resourceStorage.child(`${this.event.id}/resources/${resourceName}`);
+          updates.push(eventResRef.put(this.tempResource, {type: 'resource'}));
+        }
+        if(this.tempBackground !== "") {
+          let backgroundName = `${new Date().getTime()}_${this.tempBackground.name}`;
+          let eventBackgroundRef  = resourceStorage.child(`${this.event.id}/backgrounds/${backgroundName}`);
+          updates.push(eventBackgroundRef.put(this.tempBackground, {type: 'background-image'}));
+        }
+        Promise.all(updates)
+        .then((results) =>{
+          results.forEach(( snapshot ) => {
+            if(snapshot.metadata.type === 'resource') {
+              this.event.resourceUrl = snapshot.downloadURL;    
+            }else{
+              this.event.background_image_url = snapshot.downloadURL
+            }
+          });
           eventsRef.update(this.event, (error) => {
             if(error){
               console.log(error);
@@ -235,13 +290,13 @@ export default {
             }else{
               alert('Event successfully edited');
             }
-            this.saving = false;
+            this.updating = false;
           });
         })
         .catch((error) =>{
           console.log(error);
-          alert("Issue Uploading Resource... Please try again");
-          this.saving = false;
+          alert("Issue updating event... Please try again");
+          this.updating = false;
         });
       }else{
         eventsRef.update(this.event, (error) => {
@@ -251,10 +306,20 @@ export default {
           }else{
             alert('Event successfully edited');
           }
-          this.saving = false;
+          this.updating = false;
         });
       }
-    }
+    },
+    changeBackground (e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+
+      this.tempBackground = files[0];
+    },
+    openFileDialog () {
+      $('#fopenImage').trigger('click');
+    },
   },
 
   computed: {

@@ -46,7 +46,7 @@ export default {
   name: 'Login',
   //lifecycle methods
   created () {
-    firebase.auth().signOut();
+    firebase.app('AdminApp').auth().signOut();
   },
 
   data () {
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     signInWithPassword () {
-      return firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      return firebase.app('AdminApp').auth().signInWithEmailAndPassword(this.email, this.password)
         .then((userData) => {
           this.onSignedIn()
           return userData

@@ -78,7 +78,20 @@
               <p class="section__caption">{{ event.description }}</p>
           </div>
       </section>
-
+    
+      <!-- Sponsors Information -->
+      <section class="info info--2" v-if="event.sponsors">
+          <div class="container">
+              <div class="info__title text-center">Sponsor(s)</div>
+              <!-- Attendee list -->
+              <div class="info__list">
+                  <!-- Attendee list -->
+                  <div v-for="(sponsor, index) in event.sponsors" class="info__list__item" :key="index">
+                      <img :src="sponsor.image" alt="" class="img img-block" height="150">
+                  </div>
+              </div>
+          </div>
+      </section>
 
       <!-- that line -->
       <div class="line">
@@ -92,7 +105,7 @@
           <div class="container">
               <div class="info__title text-center">SPEAKERS</div>
               <!-- Host Information item -->
-              <div v-for="speaker in event.speakers" class="info__item">
+              <div v-for="speaker in event.speakers" class="info__item" :key="speaker.screen_name">
                   <div class="info__item__left">
                       <!-- Host Information user's avatar -->
                       <div class="info__item__avatar">
@@ -121,23 +134,23 @@
       <!-- Host Information -->
       <section class="info">
           <div class="container">
-              <div class="info__title text-center">HOST</div>
+              <div class="info__title text-center">HOST(s)</div>
               <!-- Host Information item -->
-              <div v-if="event.hosts" class="info__item">
+              <div v-for="host in event.hosts" class="info__item" :key="host.screen_name">
                   <div class="info__item__left">
                       <!-- Host Information user's avatar -->
                       <div class="info__item__avatar">
-                          <img :src="event.hosts[0].profile_image" alt="" class="img-circle img-block" height="98" width="98">
+                          <img :src="host.profile_image" alt="" class="img-circle img-block" height="98" width="98">
                       </div>
                       <div class="info__item__content">
                           <!-- Host Information user's name -->
-                          <div class="info__item__content__name">{{ event.hosts[0].name }}</div>
+                          <div class="info__item__content__name">{{ host.name }}</div>
                           <!-- Host Information user's other information -->
-                          <div class="info__item__content__detail" style="padding-right:5px">{{ event.hosts[0].description }}</div>
+                          <div class="info__item__content__detail" style="padding-right:5px">{{ host.description }}</div>
                       </div>
                   </div>
                   <div class="info__item__right">
-                      <a class="btn btn--flex btn--primary" :href="'https://twitter.com/intent/follow?screen_name='+event.hosts[0].screen_name">
+                      <a class="btn btn--flex btn--primary" :href="'https://twitter.com/intent/follow?screen_name='+host.screen_name">
                           <span class="btn--icon">
                               <svg class="icon-social-twitter icon-sm"><use xlink:href="/img/icons.svg#icon-social-twitter"></use></svg>
                           </span>
@@ -344,5 +357,7 @@ function getEvent (slug) {
 </script>
 
 <style>
-
+.info__list{
+    justify-content: center;
+}
 </style>

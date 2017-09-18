@@ -47,13 +47,12 @@
 
           <div class="x_content">
             <div class="row">
-              <Sponsor v-for="sponsor in sponsors" :sponsor="sponsor"></Sponsor>
+              <Sponsor v-for="sponsor in sponsors" :sponsor="sponsor" :key="sponsor['.key']"></Sponsor>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <bounce-loader :loading="loading" :color="blue"></bounce-loader>
   </div>
   <!-- /page content -->
 </template>
@@ -61,7 +60,6 @@
 <script>
 import firebase from 'firebase';
 
-import BounceLoader  from 'vue-spinner/src/BounceLoader';
 import Sponsor       from './Sponsor.vue';
 import CreateSponsor from './CreateSponsor.vue';
 
@@ -95,8 +93,7 @@ export default {
   },
   components: {
     Sponsor,
-    CreateSponsor,
-    BounceLoader
+    CreateSponsor
   },
   //Vuefire binding
   firebase: {
