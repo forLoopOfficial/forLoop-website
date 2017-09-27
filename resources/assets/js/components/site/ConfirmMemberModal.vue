@@ -9,8 +9,8 @@
       <form @submit.prevent="confirmMember" class="form-horizontal form-label-left">
 
         <div class="form-group">
-          <div class="members__avatar">
-              <img :src="user.photoUrl" alt="" class="img-circle" height="72" width="72">
+          <div class="members__avatar" style="display:flex">
+              <img :src="user.photoUrl" alt="" class="img-circle" height="72" width="72" style="margin: 0 auto">
           </div>
         </div>
         <div class="form-group">
