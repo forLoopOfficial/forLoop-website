@@ -291,8 +291,10 @@ export default {
 
     attendEvent() {
       let provider = new firebase.auth.TwitterAuthProvider();
+       firebase.auth().signInWithRedirect(provider);
+   
       provider.setCustomParameters({ 'screen_name': 'forLoopNigeria' });
-      firebase.auth().signInWithPopup(provider).then((result) => {
+      firebase.auth().getRedirectResult().then((result) => {
         var user = result.user;
         this.user = user;
         this.$root.$emit('show::modal', 'confirmModal');
