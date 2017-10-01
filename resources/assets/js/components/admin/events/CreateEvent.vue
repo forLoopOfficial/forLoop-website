@@ -81,7 +81,7 @@ import VueTimepicker  from 'vue2-timepicker';
 import Datepicker     from 'vuejs-datepicker';
 import AddContributor from './AddContributor.vue';
 
-const db = firebase.app('AdminCreateApp').database();
+const db = firebase.app('AdminApp').database();
 const storage = firebase.storage();
 
 const eventsRef = db.ref('events');
