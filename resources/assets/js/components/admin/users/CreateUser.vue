@@ -67,7 +67,7 @@
 import firebase from 'firebase';
 
 const adminCreateApp = firebase.app('AdminCreateApp');
-const usersRef = firebase.database().ref('users');
+const usersRef = firebase.app('AdminApp').database().ref('users');
 export default {
   name: 'CreateUser',
 
