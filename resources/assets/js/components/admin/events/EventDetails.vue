@@ -141,8 +141,8 @@ import VueTimepicker  from 'vue2-timepicker';
 import Datepicker     from 'vuejs-datepicker';
 import AddContributor from './AddContributor.vue';
 
-const db = firebase.database();
-const resourceStorage = firebase.storage().ref('events'); 
+const db = firebase.app('AdminCreateApp').database();
+const resourceStorage = firebase.storage().ref('events');
 export default {
   name: 'EventDetails',
   //lifecycle methods
@@ -278,7 +278,7 @@ export default {
         .then((results) =>{
           results.forEach(( snapshot ) => {
             if(snapshot.metadata.type === 'resource') {
-              this.event.resourceUrl = snapshot.downloadURL;    
+              this.event.resourceUrl = snapshot.downloadURL;
             }else{
               this.event.background_image_url = snapshot.downloadURL
             }
