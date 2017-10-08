@@ -48,7 +48,8 @@ class AlgoliaSyncService
 	      foreach ($data as $id => $row)
 	      {
 	      	// select the identifier of this row
-	        $row['objectID'] = $id;
+          $row['objectID'] = $id;
+          unset($row['attendees']);
 	        array_push($batch, $row);
 
 	        if (count($batch) == 10000)
