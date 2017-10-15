@@ -4,11 +4,7 @@ body {
     font-weight: $font-normal;
     color: $text-color;
     padding-top: 100px;
-    padding-bottom: 200px;
     background-color: $accent-color;
-    @include media(560px) {
-        padding-bottom: 300px;
-    }
 }
 
 html, html a {
