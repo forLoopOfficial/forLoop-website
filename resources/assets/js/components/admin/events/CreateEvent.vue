@@ -82,7 +82,7 @@ import Datepicker     from 'vuejs-datepicker';
 import AddContributor from './AddContributor.vue';
 
 const db = firebase.app('AdminApp').database();
-const storage = firebase.storage();
+const storage = firebase.app('AdminApp').storage();
 
 const eventsRef = db.ref('events');
 const eventImageRef = storage.ref('events');
