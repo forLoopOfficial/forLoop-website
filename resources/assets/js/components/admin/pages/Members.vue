@@ -47,14 +47,14 @@
 
           <div class="x_content">
             <div class="row">
-              <div v-for="(member, key) in members_page.members" class="col-md-4 col-sm-4 col-xs-12 profile_details">
+              <div v-for="(member, key) in members_page.members" :key="key" class="col-md-4 col-sm-4 col-xs-12 profile_details">
                 <div class="well profile_view">
                   <div class="col-sm-12">
                     <div class="left col-xs-7">
-                      <h2>{{member.name}}</h2>
+                      <h2>{{member.displayName}}</h2>
                     </div>
                     <div class="right col-xs-5 text-center">
-                      <img :src="member.profile_image" alt="" class="img-circle img-responsive" width="48" height="48">
+                      <img :src="member.photoUrl" alt="" class="img-circle img-responsive" width="48" height="48">
                     </div>
                   </div>
                   <div class="col-xs-12 bottom text-center">

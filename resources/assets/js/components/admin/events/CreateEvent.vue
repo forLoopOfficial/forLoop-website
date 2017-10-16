@@ -22,9 +22,10 @@
           <vue-timepicker format="h:mm A" v-model="event.when.from" placeholder="From what time?"></vue-timepicker>
           <vue-timepicker format="h:mm A" v-model="event.when.to" placeholder="To what time?"></vue-timepicker>
         </div>
-        <div class="pull-right">
+        <div class="pull-right" style="width: 35%">
           <input v-model="event.location.name" placeholder="Name the place e.g CCHub Building" style="width:100%">
-          <places v-model="event.location.address" placeholder="Address of the place"></places>
+          <vue-google-autocomplete id="address" classname="form-control" placeholder="Address of the place" v-on:placechanged="getGeoData" :value="event.location.address" :country="['ng', 'gh']">
+          </vue-google-autocomplete>
         </div>
       </div>
     </div>
@@ -39,7 +40,7 @@
       <div class="event_contributors_inner">
         <div class="event_contributors_content">
           <h3 class="text-center">Speakers</h3>
-          <div v-for="(speaker, index) in event.speakers" class="speaker_content">
+          <div v-for="(speaker, index) in event.speakers" :key="index" class="speaker_content">
             <div class="icon">
               <img :src="speaker.profile_image" width="48" height="48">
             </div>
@@ -53,7 +54,7 @@
           </div>
           <add-contributor @add="addSpeaker"></add-contributor>
           <h3 class="text-center">Host</h3>
-          <div v-for="(host, index) in event.hosts" class="host_content">
+          <div v-for="(host, index) in event.hosts" :key="index" class="host_content">
             <div class="icon">
               <img :src="host.profile_image" width="48" height="48">
             </div>
@@ -76,9 +77,10 @@
 <script>
 import firebase       from 'firebase';
 import uniqid         from 'uniqid';
-import Places         from 'vue-places';
+import { isEmpty }    from 'lodash';
 import VueTimepicker  from 'vue2-timepicker';
 import Datepicker     from 'vuejs-datepicker';
+import VueGoogleAutocomplete from 'vue-google-autocomplete';
 import AddContributor from './AddContributor.vue';
 
 const db = firebase.app('AdminApp').database();
@@ -91,9 +93,9 @@ export default {
   //lifecycle methods
 
   components: {
-    Places,
     Datepicker,
     VueTimepicker,
+    VueGoogleAutocomplete,
     AddContributor
   },
   data () {
@@ -105,8 +107,12 @@ export default {
         alert("Please Change Background Image");
         return;
       }
+      if(isEmpty(this.event.title) || isEmpty(this.event.location.address)) {
+        alert('Please fill in all required fields');
+        return;
+      }
       this.saving = true;
-      this.setEventLatLng();
+      this.createEventPhase2();
     },
     createEventPhase2 () {
       let slug = this.generateSlug(this.event.title);
@@ -130,6 +136,9 @@ export default {
           }
           this.saving = false;
         });
+      })
+      .catch(error => {
+        alert(`Issue uploading background image: ${error.message}`)
       });
 
     },
@@ -144,6 +153,11 @@ export default {
     },
     removeHost (index) {
       this.event.hosts.splice(index, 1);
+    },
+    getGeoData(address, placesData) {
+      this.event.location.address = placesData.formatted_address;
+      this.event.location.lng = address.longitude;
+      this.event.location.lat = address.latitude;
     },
     setEventLatLng () {
       if(google){

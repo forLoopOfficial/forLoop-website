@@ -4,7 +4,6 @@ require('datejs');
 // Initialize Firebase
 let config;
 if(process.env.NODE_ENV !== 'production') {
-  console.log(process.env);
   config = {
     apiKey: "AIzaSyAcjFtRHmXguek060FhPql3KH_--AXoEjs",
     authDomain: "forloop-74a2a.firebaseapp.com",
@@ -59,30 +58,91 @@ const authState = function () {
 }
 
 const App           = require('./components/AdminApp.vue');
-const AdminArea     = require('./components/admin/AdminArea.vue');
-const Dashboard     = require('./components/admin/Dashboard.vue');
-const Subscribers   = require('./components/admin/Subscribers.vue');
-const ManageUsers   = require('./components/admin/users/ManageUsers.vue');
-const UserProfile   = require('./components/admin/users/Profile.vue');
-const ViewUsers     = require('./components/admin/users/ViewUsers.vue');
-const Sponsors      = require('./components/admin/sponsors/Sponsors.vue');
-const ManageEvents  = require('./components/admin/events/ManageEvents.vue');
-const CreateEvent   = require('./components/admin/events/CreateEvent.vue');
-const EventDetails  = require('./components/admin/events/EventDetails.vue');
-const Events        = require('./components/admin/events/Events.vue');
-const ManagePages   = require('./components/admin/pages/ManagePages.vue');
-const AboutPage     = require('./components/admin/pages/About.vue');
-const MembersPage   = require('./components/admin/pages/Members.vue');
-const TeamPage      = require('./components/admin/pages/Team.vue');
-const Login         = require('./components/admin/Login.vue');
+const AdminArea     = (resolve, reject) => {
+  require.ensure(['./components/admin/AdminArea.vue'], () => {
+    resolve(require('./components/admin/AdminArea.vue'));
+  });
+};
+const Dashboard     = (resolve, reject) => {
+  require.ensure(['./components/admin/Dashboard.vue'], () => {
+    resolve(require('./components/admin/Dashboard.vue'));
+  });
+};
+const Subscribers   = (resolve, reject) => {
+  require.ensure(['./components/admin/Subscribers.vue'], () => {
+    resolve(require('./components/admin/Subscribers.vue'));
+  });
+};
+const ManageUsers   = (resolve, reject) => {
+  require.ensure(['./components/admin/users/ManageUsers.vue'], () => {
+    resolve(require('./components/admin/users/ManageUsers.vue'));
+  });
+};
+const UserProfile   = (resolve, reject) => {
+  require.ensure(['./components/admin/users/Profile.vue'], () => {
+    resolve(require('./components/admin/users/Profile.vue'));
+  });
+};
+const ViewUsers     = (resolve, reject) => {
+  require.ensure(['./components/admin/users/ViewUsers.vue'], () => {
+    resolve(require('./components/admin/users/ViewUsers.vue'));
+  });
+};
+const Sponsors      = (resolve, reject) => {
+  require.ensure(['./components/admin/sponsors/Sponsors.vue'], () => {
+    resolve(require('./components/admin/sponsors/Sponsors.vue'));
+  });
+};
+const ManageEvents  = (resolve, reject) => {
+  require.ensure(['./components/admin/events/ManageEvents.vue'], () => {
+    resolve(require('./components/admin/events/ManageEvents.vue'));
+  });
+};
+const CreateEvent   = (resolve, reject) => {
+  require.ensure(['./components/admin/events/CreateEvent.vue'], () => {
+    resolve(require('./components/admin/events/CreateEvent.vue'));
+  });
+};
+const EventDetails  = (resolve, reject) => {
+  require.ensure(['./components/admin/events/EventDetails.vue'], () => {
+    resolve(require('./components/admin/events/EventDetails.vue'));
+  });
+};
+const Events        = (resolve, reject) => {
+  require.ensure(['./components/admin/events/Events.vue'], () => {
+    resolve(require('./components/admin/events/Events.vue'));
+  });
+};
+const ManagePages   = (resolve, reject) => {
+  require.ensure(['./components/admin/pages/ManagePages.vue'], () => {
+    resolve(require('./components/admin/pages/ManagePages.vue'));
+  });
+};
+const AboutPage     = (resolve, reject) => {
+  require.ensure(['./components/admin/pages/About.vue'], () => {
+    resolve(require('./components/admin/pages/About.vue'));
+  });
+};
+const MembersPage   = (resolve, reject) => {
+  require.ensure(['./components/admin/pages/Members.vue'], () => {
+    resolve(require('./components/admin/pages/Members.vue'));
+  });
+};
+const TeamPage      = (resolve, reject) => {
+  require.ensure(['./components/admin/pages/Team.vue'], () => {
+    resolve(require('./components/admin/pages/Team.vue'));
+  });
+};
+const Login         = (resolve, reject) => {
+  require.ensure(['./components/admin/Login.vue'], () => {
+    resolve(require('./components/admin/Login.vue'));
+  });
+};
 
 //Define admin application routes
 const routes = [
   { path: '/', component: AdminArea,
     children: [
-      {
-        path: 'login', component: Login
-      },
       {
         path: 'dashboard', component: Dashboard,
         meta: {
@@ -163,6 +223,9 @@ const routes = [
         path: '', redirect: 'dashboard'
       }
     ]
+  },
+  {
+    path: '/login', component: Login
   }
 ]
 
@@ -209,3 +272,15 @@ Vue.http.interceptors.push((request, next) => {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+authState().then(user => {
+  Rollbar.configure({
+    payload: {
+      person: {
+        id: user.uid,
+        username: user.displayName,
+        email: user.email
+      }
+    }
+  });
+});

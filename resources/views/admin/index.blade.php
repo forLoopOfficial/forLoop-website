@@ -44,7 +44,7 @@
     <script src="/js/admin-main.js"></script>
 
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcjFtRHmXguek060FhPql3KH_--AXoEjs&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcjFtRHmXguek060FhPql3KH_--AXoEjs&callback=initMap&libraries=places">
     </script>
     <script>
       function initMap(){ console.log("Map Loaded");}
