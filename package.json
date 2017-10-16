@@ -50,6 +50,7 @@
     "twit": "^2.2.5",
     "vue-bulma-modal": "^1.0.1",
     "vue-datatable": "^1.0.4",
+    "vue-google-autocomplete": "^1.0.12",
     "vue-markdown": "^2.2.4",
     "vue-places": "^1.0.1",
     "vue-router": "^2.1.1",

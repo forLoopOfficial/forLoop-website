@@ -142,7 +142,7 @@ import Datepicker     from 'vuejs-datepicker';
 import AddContributor from './AddContributor.vue';
 
 const db = firebase.app('AdminApp').database();
-const resourceStorage = firebase.storage().ref('events');
+const resourceStorage = firebase.app('AdminApp').storage().ref('events');
 export default {
   name: 'EventDetails',
   //lifecycle methods
