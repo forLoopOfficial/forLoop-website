@@ -1,11 +1,11 @@
 .footer {
     padding: 60px 0 0;
     background-color: $accent-color;
-    position: fixed;
+    position: static;
     bottom: 80px;
     right: 0;
     left: 0;
-    z-index: -1;
+    z-index: 999;
     @include media(560px) {
         bottom: 0;
     }
