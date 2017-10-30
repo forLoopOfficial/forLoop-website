@@ -124,6 +124,7 @@ new Vue({
  */
 
 Vue.filter('dateFormat', (value) => {
+    value += 4600000;
     return new Date(value).toString('dddd MMM d yyyy');//custom format by datejs
 });
 
