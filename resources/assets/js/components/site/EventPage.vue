@@ -243,6 +243,7 @@ export default {
       event.id = snapshot.key;
       this.setEvent(event);
     });
+    this.user = firebase.auth().currentUser || this.user;
   },
   beforeRouteEnter: (to, from, next) => {
     let slug = to.params.slug;
@@ -290,6 +291,12 @@ export default {
     },
 
     attendEvent() {
+      // user already exist don't bother with twitter auth again
+      if(this.user.uid) {
+        this.$root.$emit('show::modal', 'confirmModal');
+        return;
+      }
+
       let provider = new firebase.auth.TwitterAuthProvider();
       provider.setCustomParameters({ 'screen_name': 'forLoopNigeria' });
       firebase.auth().signInWithPopup(provider).then((result) => {
@@ -298,7 +305,7 @@ export default {
         this.$root.$emit('show::modal', 'confirmModal');
       }).catch(function(error) {
         console.log(error);
-        alert(`Please try again: ${error.message}`);
+        alert(`Please try again: Issue Authenticating with Twitter`);
       });
     },
 

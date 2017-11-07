@@ -28,6 +28,7 @@
     "algoliasearch": "^3.21.1",
     "animate.css": "^3.5.1",
     "autosize": "^3.0.15",
+    "babel-polyfill": "^6.26.0",
     "bootstrap": "^3.3.7",
     "bootstrap-progressbar": "^0.9.0",
     "bootstrap-vue": "^0.5.2",
