@@ -24,7 +24,7 @@
         </div>
         <div class="pull-right" style="width: 35%">
           <input v-model="event.location.name" placeholder="Name the place e.g CCHub Building" style="width:100%">
-          <vue-google-autocomplete id="address" classname="form-control" placeholder="Address of the place" v-on:placechanged="getGeoData" :value="event.location.address" :country="['ng', 'gh']">
+          <vue-google-autocomplete id="address" classname="form-control" placeholder="Address of the place" v-on:placechanged="getGeoData" :value="event.location.address">
           </vue-google-autocomplete>
         </div>
       </div>
