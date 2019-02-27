@@ -56,13 +56,13 @@
                                     <span class="line-number block__indent-1">8</span>&lt;<span class="tag">ul</span>&gt;
                                 </div>
                                 <div class="block">
-                                    <span class="line-number block__indent-2">9</span>&lt;<span class="tag">li</span>&gt;<span class="context">Theme: Developer’s Unite</span>&lt;/<span class="tag">li</span>&gt;
+                                    <span class="line-number block__indent-2">9</span>&lt;<span class="tag">li</span>&gt;<span class="context">forloop Lagos Summit</span>&lt;/<span class="tag">li</span>&gt;
                                 </div>
                                 <div class="block">
-                                    <span class="line-number block__indent-2">10</span>&lt;<span class="tag">li</span>&gt;<span class="context">Location: CCHub Building, Yaba Lagos</span>&lt;/<span class="tag">li</span>&gt;
+                                    <span class="line-number block__indent-2">10</span>&lt;<span class="tag">li</span>&gt;<span class="context">Location: Zone Tech Park</span>&lt;/<span class="tag">li</span>&gt;
                                 </div>
                                 <div class="block">
-                                    <span class="line-number block__indent-2">11</span>&lt;<span class="tag">li</span>&gt;<span class="context">Time: 28 Sep, 11 PM</span>&lt;/<span class="tag">li</span>&gt;
+                                    <span class="line-number block__indent-2">11</span>&lt;<span class="tag">li</span>&gt;<span class="context">Time: 08 Mar, 11 PM</span>&lt;/<span class="tag">li</span>&gt;
                                 </div>
                                 <div class="block">
                                     <span class="line-number block__indent-1">12</span>&lt;/<span class="tag">ul</span>&gt;
